@@ -1,13 +1,18 @@
 import React from 'react';
+import {TasksStateType} from "../Todolist";
 
-function Tasks() {
+type PropsType = {
+    tasks: TasksStateType
+}
+
+const Tasks: React.FC<PropsType> = (
+    {tasks,}
+) => {
     return (
         <ul>
-            <li>task_1</li>
+            <span>{tasks[firstTodo]}</span>
             <li>task_2</li>
             <li>task_3</li>
-            <li>task_4</li>
-            <li>task_5</li>
         </ul>
     );
 }
