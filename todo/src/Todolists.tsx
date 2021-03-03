@@ -6,11 +6,13 @@ import s from "./App.module.css";
 
 type PropsType = {
     todoListsComponents: Array<TodolistType>,
-    tasks: TasksStateType
+    tasks: TasksStateType,
+    addTask: (title: string, todoListsID: string) => void,
+    removeTask: (id: string, todoListsID: string) => void
 }
 
 const TodoLists: React.FC<PropsType> = (
-    {todoListsComponents,tasks}
+    {todoListsComponents, tasks, addTask, removeTask}
 ) => {
 
     const todoListsItem = todoListsComponents.map(tl => {
@@ -18,6 +20,8 @@ const TodoLists: React.FC<PropsType> = (
                 <TodoList todoListsID={tl.id}
                           titleTodoList={tl.title}
                           tasks={tasks}
+                          addTask={addTask}
+                          removeTask={removeTask}
                 />
             )
         }

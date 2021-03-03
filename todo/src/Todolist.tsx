@@ -8,18 +8,23 @@ import {TasksStateType} from "./App";
 type PropsType = {
     todoListsID: string,
     titleTodoList: string,
-    tasks: TasksStateType
+    tasks: TasksStateType,
+    addTask: (title: string, todoListsID: string) => void,
+    removeTask: (id: string, todoListsID: string) => void
 }
 
 const TodoList: React.FC<PropsType> = (
-    {todoListsID, titleTodoList, tasks}
+    {todoListsID, titleTodoList, tasks,addTask, removeTask}
 ) => {
 
     return (
         <div className={s.todo}>
-            <TasksManagement titleTodoList={titleTodoList}/>
+            <TasksManagement titleTodoList={titleTodoList}
+                             addTask={addTask}
+                             todoListsID={todoListsID}/>
             <Tasks tasks={tasks}
-                   todoListsID={todoListsID}/>
+                   todoListsID={todoListsID}
+                   removeTask={removeTask}/>
             <ButtonsFiltering/>
         </div>
     );

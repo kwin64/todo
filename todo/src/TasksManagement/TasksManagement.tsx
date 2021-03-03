@@ -1,21 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 type PropsType = {
     titleTodoList: string,
-
+    addTask: (title: string, todoListsID: string) => void,
+    todoListsID: string,
 }
 
 const TasksManagement: React.FC<PropsType> = (
-    {titleTodoList}
+    {titleTodoList, addTask, todoListsID}
 ) => {
 
+    const [valueTask, setValueTask] = useState<string>('')
+
+    const newValueTask = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValueTask(e.currentTarget.value)
+    }
+
+    const AddTaskHandler = () => {
+        if (valueTask) {
+            addTask(valueTask, todoListsID)
+        }
+        setValueTask('')
+    }
+
     return (
-        <div key={1}>
+        <div>
             <h3>
                 {titleTodoList}
-                <button>Delete tasks</button>
+                <button>X</button>
             </h3>
-            <input/><button>Add task</button>
+            <input onChange={newValueTask}
+                   value={valueTask}/>
+            <button onClick={AddTaskHandler}
+            >+
+            </button>
         </div>
     );
 }

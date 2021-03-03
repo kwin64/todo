@@ -7,7 +7,6 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 export type TodolistType = { id: string, title: string, filter: 'all' | 'active' | 'completed' }
-export type TodolistsType = Array<TodolistType>
 
 function App() {
 
@@ -32,10 +31,38 @@ function App() {
         ]
     })
 
+    const addTask = (title: string, todoListsID: string) => {
+        const newTask: TaskType = {id: v1(), title: title, isDone: false}
+        tasks[todoListsID] = [newTask, ...tasks[todoListsID]]
+        setTasks({...tasks})
+    }
+    const removeTask = (id: string, todoListsID: string) => {
+        tasks[todoListsID] = tasks[todoListsID].filter(tl => tl.id !== id)
+        setTasks({...tasks})
+    }
+    const filteredTasks = () => {
+
+    }
+    const changeStatusTask = (id: string, todoListsID: string) => {
+
+    }
+
+
+    const todolistsItems = todolists.map(tl => {
+        if (tl.filter === "active") {
+            tasks[tl.id] = tasks[tl.id].filter(t => !t.isDone)
+        }
+        if (tl.filter === "completed") {
+            tasks[tl.id] = tasks[tl.id].filter(t => t.isDone)
+        }
+    })
+
     return (
         <div>
             <Todolists todoListsComponents={todolists}
-                       tasks={tasks}/>
+                       tasks={tasks}
+                       addTask={addTask}
+                       removeTask={removeTask}/>
         </div>
     );
 }
