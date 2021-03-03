@@ -1,18 +1,22 @@
 import React from 'react';
-import {TasksStateType} from "../Todolist";
+import {TaskType} from "../Todolist";
 
 type PropsType = {
-    tasks: TasksStateType
+    todo: Array<TaskType>
 }
 
 const Tasks: React.FC<PropsType> = (
-    {tasks,}
+    {todo}
 ) => {
+    const tasks = todo.map(t =>
+        <li key={t.id}>
+            {t.title}
+            <input type='checkbox'
+                   checked={t.isDone}/>
+        </li>)
     return (
         <ul>
-            <span>{tasks[firstTodo]}</span>
-            <li>task_2</li>
-            <li>task_3</li>
+            {tasks}
         </ul>
     );
 }

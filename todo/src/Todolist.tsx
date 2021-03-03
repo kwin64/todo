@@ -5,7 +5,7 @@ import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
 import {v1} from 'uuid';
 
-export type TaskType = { id: string, title: string, filter: boolean }
+export type TaskType = { id: string, title: string, isDone: boolean }
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
@@ -25,21 +25,22 @@ function TodoList() {
 
     const [tasks, setTasks] = useState<TasksStateType>({
         [firstTodo]: [
-            {id: v1(), title: 'Buy car', filter: false},
-            {id: v1(), title: 'Buy pen', filter: true},
-            {id: v1(), title: 'Buy home', filter: false},
+            {id: v1(), title: 'Buy car', isDone: false},
+            {id: v1(), title: 'Buy pen', isDone: true},
+            {id: v1(), title: 'Buy home', isDone: false},
         ],
         [secondTodo]: [
-            {id: v1(), title: 'Sleep', filter: true},
-            {id: v1(), title: 'Eat', filter: true},
-            {id: v1(), title: 'Work', filter: true},
+            {id: v1(), title: 'Sleep', isDone: true},
+            {id: v1(), title: 'Eat', isDone: true},
+            {id: v1(), title: 'Work', isDone: true},
         ]
     })
 
+    const todo = tasks[firstTodo]
     return (
         <div>
-            <TasksManagement/>
-            <Tasks tasks={tasks}/>
+            <TasksManagement title={todolists}/>
+            <Tasks todo={todo}/>
             <ButtonsFiltering/>
         </div>
     );
