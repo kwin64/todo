@@ -1,22 +1,23 @@
 import React from 'react';
-import {TaskType} from "../Todolist";
+import {TasksStateType} from "../App";
 
 type PropsType = {
-    todo: Array<TaskType>
+    tasks: TasksStateType,
+    todoListsID: string
 }
 
 const Tasks: React.FC<PropsType> = (
-    {todo}
+    {tasks,todoListsID}
 ) => {
-    const tasks = todo.map(t =>
-        <li key={t.id}>
+    const tasksItems = tasks[todoListsID].map(t =>
+        <li>
             {t.title}
             <input type='checkbox'
                    checked={t.isDone}/>
         </li>)
     return (
         <ul>
-            {tasks}
+            {tasksItems}
         </ul>
     );
 }

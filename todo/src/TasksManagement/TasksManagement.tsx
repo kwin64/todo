@@ -1,22 +1,21 @@
 import React from 'react';
-import {TodolistType} from "../Todolist";
 
 type PropsType = {
-    title: Array<TodolistType>
+    titleTodoList: string,
+
 }
 
 const TasksManagement: React.FC<PropsType> = (
-    {title}
+    {titleTodoList}
 ) => {
 
     return (
-        <div key={title[0].id}>
+        <div key={1}>
             <h3>
-                {title[0].title}
+                {titleTodoList}
                 <button>Delete tasks</button>
             </h3>
-            <input/>
-            <button>Add task</button>
+            <input/><button>Add task</button>
         </div>
     );
 }
