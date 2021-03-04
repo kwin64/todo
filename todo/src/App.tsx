@@ -6,7 +6,9 @@ export type TaskType = { id: string, title: string, isDone: boolean }
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-export type TodolistType = { id: string, title: string, filter: 'all' | 'active' | 'completed' }
+export type FilterValueType = 'all' | 'active' | 'completed'
+
+export type TodolistType = { id: string, title: string, filter: FilterValueType }
 
 function App() {
 
@@ -40,21 +42,25 @@ function App() {
         tasks[todoListsID] = tasks[todoListsID].filter(tl => tl.id !== id)
         setTasks({...tasks})
     }
-    const filteredTasks = () => {
-
-    }
-    const changeStatusTask = (id: string, todoListsID: string) => {
-
-    }
-
-    const copy = todolists.map(tl => {
-        if (tl.filter === "active") {
-            tasks[tl.id] = tasks[tl.id].filter(t => !t.isDone)
+    const filteredTasks = (filterValue: FilterValueType, todoListsID: string) => {
+        if (filterValue === 'active') {
+            tasks[todoListsID] = tasks[todoListsID].filter(t => !t.isDone)
         }
-        if (tl.filter === "completed") {
-            tasks[tl.id] = tasks[tl.id].filter(t => t.isDone)
+        if (filterValue === 'completed') {
+            tasks[todoListsID] = tasks[todoListsID].filter(t => t.isDone)
         }
-    })
+        return setTasks({...tasks})
+    }
+    const changeStatusTask = (taskID: string, statusTask: boolean, todoListsID: string) => {
+        const task = tasks[todoListsID].find(t => t.id === taskID)
+        if (task) {
+            task.isDone = statusTask
+            setTasks({...tasks})
+        }
+    }
+    const removeTodoList = (todoListsID: string) => {
+        tasks[todoListsID] = tasks[todoListsID]
+    }
 
     const todolistsItems = todolists.map(tl => {
         if (tl.filter === "active") {
@@ -70,7 +76,9 @@ function App() {
             <Todolists todoListsComponents={todolists}
                        tasks={tasks}
                        addTask={addTask}
-                       removeTask={removeTask}/>
+                       removeTask={removeTask}
+                       filteredTasks={filteredTasks}
+                       changeStatusTask={changeStatusTask}/>
         </div>
     );
 }

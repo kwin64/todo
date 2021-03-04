@@ -1,13 +1,34 @@
 import React from 'react';
+import {FilterValueType} from "../App";
 
-function ButtonsFiltering() {
+type PropsType = {
+    filteredTasks: (filterValue: FilterValueType, todoListsID: string) => void,
+    todoListsID: string,
+}
+
+const ButtonsFiltering: React.FC<PropsType> = (
+    {
+        filteredTasks,
+        todoListsID
+    }
+) => {
+    const onClickButtonAllHandler = () => {
+        filteredTasks('all', todoListsID)
+    }
+    const onClickButtonActiveHandler = () => {
+        filteredTasks('active', todoListsID)
+    }
+    const onClickButtonCompletedHandler = () => {
+        filteredTasks('completed', todoListsID)
+    }
     return (
         <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={onClickButtonAllHandler}>All</button>
+            <button onClick={onClickButtonActiveHandler}>Active</button>
+            <button onClick={onClickButtonCompletedHandler}>Completed</button>
         </div>
     );
 }
+
 
 export default ButtonsFiltering;

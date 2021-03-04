@@ -7,7 +7,11 @@ type PropsType = {
 }
 
 const TasksManagement: React.FC<PropsType> = (
-    {titleTodoList, addTask, todoListsID}
+    {
+        titleTodoList,
+        addTask,
+        todoListsID
+    }
 ) => {
 
     const [valueTask, setValueTask] = useState<string>('')
