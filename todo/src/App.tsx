@@ -47,6 +47,14 @@ function App() {
 
     }
 
+    const copy = todolists.map(tl => {
+        if (tl.filter === "active") {
+            tasks[tl.id] = tasks[tl.id].filter(t => !t.isDone)
+        }
+        if (tl.filter === "completed") {
+            tasks[tl.id] = tasks[tl.id].filter(t => t.isDone)
+        }
+    })
 
     const todolistsItems = todolists.map(tl => {
         if (tl.filter === "active") {
