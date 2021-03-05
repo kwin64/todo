@@ -13,7 +13,7 @@ type PropsType = {
     removeTask: (id: string, todoListsID: string) => void,
     filteredTasks: (filterValue: FilterValueType, todoListsID: string) => void,
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void,
-
+    removeTodoList: (todoListsID: string) => void
 }
 
 const TodoList: React.FC<PropsType> = (
@@ -24,7 +24,8 @@ const TodoList: React.FC<PropsType> = (
         addTask,
         removeTask,
         filteredTasks,
-        changeStatusTask
+        changeStatusTask,
+        removeTodoList
     }
 ) => {
 
@@ -32,7 +33,8 @@ const TodoList: React.FC<PropsType> = (
         <div className={s.todo}>
             <TasksManagement titleTodoList={titleTodoList}
                              addTask={addTask}
-                             todoListsID={todoListsID}/>
+                             todoListsID={todoListsID}
+                             removeTodoList={removeTodoList}/>
             <Tasks tasks={tasks}
                    todoListsID={todoListsID}
                    removeTask={removeTask}
