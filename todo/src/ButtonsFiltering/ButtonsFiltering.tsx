@@ -1,31 +1,35 @@
 import React from 'react';
 import {FilterValueType} from "../App";
+import s from '../App.module.css';
 
 type PropsType = {
-    filteredTasks: (filterValue: FilterValueType, todoListsID: string) => void,
-    todoListsID: string,
+    changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
+    filter: FilterValueType
+    todoListsID: string
 }
 
 const ButtonsFiltering: React.FC<PropsType> = (
     {
-        filteredTasks,
+        changeTodoListFilter,
+        filter,
         todoListsID
     }
 ) => {
     const onClickButtonAllHandler = () => {
-        filteredTasks('all', todoListsID)
+        changeTodoListFilter('all', todoListsID)
     }
     const onClickButtonActiveHandler = () => {
-        filteredTasks('active', todoListsID)
+        changeTodoListFilter('active', todoListsID)
     }
     const onClickButtonCompletedHandler = () => {
-        filteredTasks('completed', todoListsID)
+        changeTodoListFilter('completed', todoListsID)
     }
     return (
         <div>
-            <button onClick={onClickButtonAllHandler}>All</button>
-            <button onClick={onClickButtonActiveHandler}>Active</button>
-            <button onClick={onClickButtonCompletedHandler}>Completed</button>
+            <button className={filter === 'all' ? s.activeButton : ''} onClick={onClickButtonAllHandler}>All</button>
+            <button className={filter === 'active'? s.activeButton : ''} onClick={onClickButtonActiveHandler}>Active</button>
+            <button className={filter === 'completed'? s.activeButton : ''} onClick={onClickButtonCompletedHandler}>Completed
+            </button>
         </div>
     );
 }

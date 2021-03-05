@@ -3,17 +3,18 @@ import s from './App.module.css';
 import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
-import {FilterValueType, TasksStateType} from "./App";
+import {FilterValueType, TasksStateType, TaskType} from "./App";
 
 type PropsType = {
     todoListsID: string,
     titleTodoList: string,
-    tasks: TasksStateType,
+    tasks: Array<TaskType>,
     addTask: (title: string, todoListsID: string) => void,
     removeTask: (id: string, todoListsID: string) => void,
-    filteredTasks: (filterValue: FilterValueType, todoListsID: string) => void,
+    changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void,
-    removeTodoList: (todoListsID: string) => void
+    removeTodoList: (todoListsID: string) => void,
+    filter: FilterValueType
 }
 
 const TodoList: React.FC<PropsType> = (
@@ -23,9 +24,10 @@ const TodoList: React.FC<PropsType> = (
         tasks,
         addTask,
         removeTask,
-        filteredTasks,
+        changeTodoListFilter,
         changeStatusTask,
-        removeTodoList
+        removeTodoList,
+        filter
     }
 ) => {
 
@@ -38,9 +40,9 @@ const TodoList: React.FC<PropsType> = (
             <Tasks tasks={tasks}
                    todoListsID={todoListsID}
                    removeTask={removeTask}
-                   changeStatusTask={changeStatusTask}/>
-            <ButtonsFiltering filteredTasks={filteredTasks}
-                              todoListsID={todoListsID}/>
+                   changeStatusTask={changeStatusTask}
+            />
+            <ButtonsFiltering changeTodoListFilter={changeTodoListFilter} filter={filter} todoListsID={todoListsID}/>
         </div>
     );
 }

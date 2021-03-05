@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from 'react';
-import {TasksStateType} from "../App";
+import {TasksStateType, TaskType} from "../App";
 
 type PropsType = {
-    tasks: TasksStateType,
+    tasks: Array<TaskType>,
     todoListsID: string,
     removeTask: (id: string, todoListsID: string) => void,
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void,
@@ -16,7 +16,7 @@ const Tasks: React.FC<PropsType> = (
         changeStatusTask
     }
 ) => {
-    const tasksItems = tasks[todoListsID].map(t => {
+    const tasksItems = tasks.map(t => {
             const removeTaskHandler = () => {
                 removeTask(t.id, todoListsID)
             }

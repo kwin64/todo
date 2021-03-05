@@ -9,9 +9,9 @@ type PropsType = {
     tasks: TasksStateType,
     addTask: (title: string, todoListsID: string) => void,
     removeTask: (id: string, todoListsID: string) => void,
-    filteredTasks: (filterValue: FilterValueType, todoListsID: string) => void,
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void,
     removeTodoList: (todoListsID: string) => void
+    changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
 }
 
 const TodoLists: React.FC<PropsType> = (
@@ -20,22 +20,33 @@ const TodoLists: React.FC<PropsType> = (
         tasks,
         addTask,
         removeTask,
-        filteredTasks,
+        changeTodoListFilter,
         changeStatusTask,
         removeTodoList
     }
 ) => {
 
-    const todoListsItem = todoListsComponents.map(tl => {
+    const todoListsItem = todoListsComponents.map((tl) => {
+            let tasksForTodoLists = tasks[tl.id]
+            if (tl.filter === 'active') {
+                tasksForTodoLists = tasksForTodoLists.filter(t  => !t.isDone)
+            }
+            if (tl.filter === 'completed') {
+                tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
+
+            }
+
             return (
                 <TodoList todoListsID={tl.id}
                           titleTodoList={tl.title}
-                          tasks={tasks}
+                          filter={tl.filter}
+                          tasks={tasksForTodoLists}
                           addTask={addTask}
                           removeTask={removeTask}
-                          filteredTasks={filteredTasks}
+                          changeTodoListFilter={changeTodoListFilter}
                           changeStatusTask={changeStatusTask}
-                          removeTodoList={removeTodoList}/>
+                          removeTodoList={removeTodoList}
+                         />
             )
         }
     )
