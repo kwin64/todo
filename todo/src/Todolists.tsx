@@ -26,10 +26,10 @@ const TodoLists: React.FC<PropsType> = (
     }
 ) => {
 
-    const todoListsItem = todoListsComponents.map((tl) => {
+    const todoListsItem = todoListsComponents.map(tl => {
             let tasksForTodoLists = tasks[tl.id]
             if (tl.filter === 'active') {
-                tasksForTodoLists = tasksForTodoLists.filter(t  => !t.isDone)
+                tasksForTodoLists = tasksForTodoLists.filter(t => !t.isDone)
             }
             if (tl.filter === 'completed') {
                 tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
@@ -46,7 +46,7 @@ const TodoLists: React.FC<PropsType> = (
                           changeTodoListFilter={changeTodoListFilter}
                           changeStatusTask={changeStatusTask}
                           removeTodoList={removeTodoList}
-                         />
+                />
             )
         }
     )

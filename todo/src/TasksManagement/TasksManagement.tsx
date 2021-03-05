@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {KeyboardEvent, useState} from 'react';
 
 type PropsType = {
     titleTodoList: string,
@@ -17,16 +17,27 @@ const TasksManagement: React.FC<PropsType> = (
 ) => {
 
     const [valueTask, setValueTask] = useState<string>('')
+    const [error, setError] = useState<boolean>(false)
 
     const newValueTask = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValueTask(e.currentTarget.value)
+        setError(false)
     }
 
     const addTaskHandler = () => {
-        if (valueTask) {
-            addTask(valueTask, todoListsID)
+        const trimmedValueTask = valueTask.trim()
+        if (trimmedValueTask) {
+            addTask(trimmedValueTask, todoListsID)
+        } else {
+            setError(true)
         }
         setValueTask('')
+    }
+    const keyPressAddTask = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            debugger
+            addTaskHandler()
+        }
     }
 
     const removeTodoListHandler = () => {
@@ -41,10 +52,13 @@ const TasksManagement: React.FC<PropsType> = (
                 <button onClick={removeTodoListHandler}>X</button>
             </h3>
             <input onChange={newValueTask}
-                   value={valueTask}/>
+                   value={valueTask}
+                   onKeyPress={keyPressAddTask}
+                   className={error ? 'error' : ''}/>
             <button onClick={addTaskHandler}
             >+
             </button>
+            {error && <div className={'errorMessage'}>Incorrect value!</div>}
         </div>
     );
 }

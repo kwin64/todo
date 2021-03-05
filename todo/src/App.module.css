@@ -1,11 +1,34 @@
-.container{
+.container {
     display: flex;
     margin: 100px 400px;
+    font-size: 25px;
 }
+
 .todo {
+    text-align: center;
     padding: 10px;
-    margin: 10px
+    margin: 10px;
+    border: 1px solid blueviolet;
+    border-radius: 5px;
 }
+
 .activeButton {
     background-color: yellow;
+}
+
+.container li {
+    text-align: left;
+    list-style: none;
+    padding: 5px;
+}
+
+.error {
+    background-color: red;
+}
+
+.container li errorMessage {
+    color: red;
+}
+.li isDone {
+    opacity: 0.5;
 }

@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {TasksStateType, TaskType} from "../App";
+import {TaskType} from "../App";
 
 type PropsType = {
     tasks: Array<TaskType>,
@@ -24,7 +24,7 @@ const Tasks: React.FC<PropsType> = (
                 changeStatusTask(t.id, e.currentTarget.checked, todoListsID)
             }
 
-            return (<li>
+            return (<li className={t.isDone ? 'isDone' : ''}>
                 {t.title}
                 <input type='checkbox'
                        checked={t.isDone}

@@ -3,7 +3,7 @@ import s from './App.module.css';
 import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
-import {FilterValueType, TasksStateType, TaskType} from "./App";
+import {FilterValueType, TaskType} from "./App";
 
 type PropsType = {
     todoListsID: string,
