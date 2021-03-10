@@ -6,15 +6,18 @@ import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
 
 type PropsType = {
-    todoListsID: string,
-    titleTodoList: string,
-    tasks: Array<TaskType>,
-    addTask: (title: string, todoListsID: string) => void,
-    removeTask: (id: string, todoListsID: string) => void,
+    todoListsID: string
+    titleTodoList: string
+    tasks: Array<TaskType>
+    addTask: (title: string, todoListsID: string) => void
+    removeTask: (id: string, todoListsID: string) => void
     changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
-    changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void,
-    removeTodoList: (todoListsID: string) => void,
+    changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
+    removeTodoList: (todoListsID: string) => void
     filter: FilterValueType
+    changeTodoListTitle:  (newTitle: string, todoListsID: string) => void
+    changeTasksTitle:  (idTask: string, newTitle: string, todoListsID: string) => void
+
 }
 
 const TodoList: React.FC<PropsType> = (
@@ -27,22 +30,30 @@ const TodoList: React.FC<PropsType> = (
         changeTodoListFilter,
         changeStatusTask,
         removeTodoList,
-        filter
+        filter,
+        changeTodoListTitle,
+        changeTasksTitle
     }
 ) => {
 
     return (
         <div className={s.todo}>
-            <TasksManagement titleTodoList={titleTodoList}
+            <TasksManagement todoListsID={todoListsID}
+                             titleTodoList={titleTodoList}
                              addTask={addTask}
-                             todoListsID={todoListsID}
-                             removeTodoList={removeTodoList}/>
-            <Tasks tasks={tasks}
-                   todoListsID={todoListsID}
+                             removeTodoList={removeTodoList}
+                             changeTodoListTitle={changeTodoListTitle}
+            />
+            <Tasks todoListsID={todoListsID}
+                   tasks={tasks}
                    removeTask={removeTask}
                    changeStatusTask={changeStatusTask}
+                   changeTasksTitle={changeTasksTitle}
             />
-            <ButtonsFiltering changeTodoListFilter={changeTodoListFilter} filter={filter} todoListsID={todoListsID}/>
+            <ButtonsFiltering todoListsID={todoListsID}
+                              changeTodoListFilter={changeTodoListFilter}
+                              filter={filter}
+            />
         </div>
     );
 }

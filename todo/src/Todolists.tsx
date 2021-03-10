@@ -5,13 +5,15 @@ import {FilterValueType, TasksStateType, TodolistType} from "./App";
 import s from "./App.module.css";
 
 type PropsType = {
-    todoListsComponents: Array<TodolistType>,
-    tasks: TasksStateType,
-    addTask: (title: string, todoListsID: string) => void,
-    removeTask: (id: string, todoListsID: string) => void,
-    changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void,
+    todoListsComponents: Array<TodolistType>
+    tasks: TasksStateType
+    addTask: (title: string, todoListsID: string) => void
+    removeTask: (id: string, todoListsID: string) => void
+    changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
     removeTodoList: (todoListsID: string) => void
     changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
+    changeTodoListTitle:  (newTitle: string, todoListsID: string) => void
+    changeTasksTitle:  (idTask: string, newTitle: string, todoListsID: string) => void
 }
 
 const TodoLists: React.FC<PropsType> = (
@@ -22,7 +24,9 @@ const TodoLists: React.FC<PropsType> = (
         removeTask,
         changeTodoListFilter,
         changeStatusTask,
-        removeTodoList
+        removeTodoList,
+        changeTodoListTitle,
+        changeTasksTitle
     }
 ) => {
 
@@ -33,7 +37,6 @@ const TodoLists: React.FC<PropsType> = (
             }
             if (tl.filter === 'completed') {
                 tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
-
             }
 
             return (
@@ -46,6 +49,8 @@ const TodoLists: React.FC<PropsType> = (
                           changeTodoListFilter={changeTodoListFilter}
                           changeStatusTask={changeStatusTask}
                           removeTodoList={removeTodoList}
+                          changeTodoListTitle={changeTodoListTitle}
+                          changeTasksTitle={changeTasksTitle}
                 />
             )
         }
