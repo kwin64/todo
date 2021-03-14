@@ -2,7 +2,7 @@ import React, {KeyboardEvent, useState} from 'react';
 
 type PropsType = {
     title: string
-    changeTitle:  (newTitle: string) => void
+    changeTitle: (newTitle: string) => void
 }
 
 const EditableTitle: React.FC<PropsType> = (
@@ -23,16 +23,12 @@ const EditableTitle: React.FC<PropsType> = (
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
-
     const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             setEnableEdit(false)
             changeTitle(newTitle)
         }
     }
-
-
-
 
     return (
         enableEdit

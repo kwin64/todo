@@ -38,7 +38,6 @@ const TodoLists: React.FC<PropsType> = (
             if (tl.filter === 'completed') {
                 tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
             }
-
             return (
                 <TodoList todoListsID={tl.id}
                           titleTodoList={tl.title}

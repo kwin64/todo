@@ -93,7 +93,8 @@ function App() {
                        changeStatusTask={changeStatusTask}
                        removeTodoList={removeTodoList}
                        changeTodoListTitle={changeTodoListTitle}
-                       changeTasksTitle={changeTasksTitle}/>
+                       changeTasksTitle={changeTasksTitle}
+            />
         </div>
     );
 }
