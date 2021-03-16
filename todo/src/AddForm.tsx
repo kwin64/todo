@@ -1,11 +1,13 @@
 import React, {KeyboardEvent, useState} from 'react';
 import s from "./App.module.css";
+import Button from '@material-ui/core/Button';
+import {TextField} from "@material-ui/core";
 
 type PropsType = {
     addItemForm: (title: string) => void
 }
 
-const AddForm:React.FC<PropsType>= (
+const AddForm: React.FC<PropsType> = (
     {
         addItemForm
     }
@@ -39,13 +41,15 @@ const AddForm:React.FC<PropsType>= (
 
     return (
         <div className={s.todo}>
-            <input onChange={newValueTask}
-                   value={valueTask}
-                   onKeyPress={keyPressAddTask}
-                   className={error ? 'error' : ''}/>
-            <button onClick={addTaskHandler}
+            <TextField id='outlined-basic' label='Add new task' variant='outlined'
+                       onChange={newValueTask}
+                       value={valueTask}
+                       onKeyPress={keyPressAddTask}
+                       className={error ? 'outlined-error-helper-text' : ''}/>
+            <Button onClick={addTaskHandler}
+                    color='default'
             >+
-            </button>
+            </Button>
             {error && <div className={'errorMessage'}>Incorrect value!</div>}
         </div>
     )

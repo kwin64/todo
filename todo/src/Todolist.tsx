@@ -15,8 +15,8 @@ type PropsType = {
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
     removeTodoList: (todoListsID: string) => void
     filter: FilterValueType
-    changeTodoListTitle:  (newTitle: string, todoListsID: string) => void
-    changeTasksTitle:  (idTask: string, newTitle: string, todoListsID: string) => void
+    changeTodoListTitle: (newTitle: string, todoListsID: string) => void
+    changeTasksTitle: (idTask: string, newTitle: string, todoListsID: string) => void
 }
 
 const TodoList: React.FC<PropsType> = (

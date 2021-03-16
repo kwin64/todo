@@ -3,6 +3,8 @@ import './App.module.css';
 import TodoList from "./Todolist";
 import {FilterValueType, TasksStateType, TodolistType} from "./App";
 import s from "./App.module.css";
+import Container from '@material-ui/core/Container/Container';
+import {Box} from "@material-ui/core";
 
 type PropsType = {
     todoListsComponents: Array<TodolistType>
@@ -12,8 +14,8 @@ type PropsType = {
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
     removeTodoList: (todoListsID: string) => void
     changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
-    changeTodoListTitle:  (newTitle: string, todoListsID: string) => void
-    changeTasksTitle:  (idTask: string, newTitle: string, todoListsID: string) => void
+    changeTodoListTitle: (newTitle: string, todoListsID: string) => void
+    changeTasksTitle: (idTask: string, newTitle: string, todoListsID: string) => void
 }
 
 const TodoLists: React.FC<PropsType> = (
@@ -39,18 +41,20 @@ const TodoLists: React.FC<PropsType> = (
                 tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
             }
             return (
-                <TodoList todoListsID={tl.id}
-                          titleTodoList={tl.title}
-                          filter={tl.filter}
-                          tasks={tasksForTodoLists}
-                          addTask={addTask}
-                          removeTask={removeTask}
-                          changeTodoListFilter={changeTodoListFilter}
-                          changeStatusTask={changeStatusTask}
-                          removeTodoList={removeTodoList}
-                          changeTodoListTitle={changeTodoListTitle}
-                          changeTasksTitle={changeTasksTitle}
-                />
+                <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'} >
+                    <TodoList todoListsID={tl.id}
+                              titleTodoList={tl.title}
+                              filter={tl.filter}
+                              tasks={tasksForTodoLists}
+                              addTask={addTask}
+                              removeTask={removeTask}
+                              changeTodoListFilter={changeTodoListFilter}
+                              changeStatusTask={changeStatusTask}
+                              removeTodoList={removeTodoList}
+                              changeTodoListTitle={changeTodoListTitle}
+                              changeTasksTitle={changeTasksTitle}
+                    />
+                </Box>
             )
         }
     )
