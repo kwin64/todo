@@ -21,7 +21,6 @@ const AddForm: React.FC<PropsType> = (
         setValueTask(e.currentTarget.value)
         setError(false)
     }
-
     const addTaskHandler = () => {
         const trimmedValueTask = valueTask.trim()
         if (trimmedValueTask) {
@@ -31,30 +30,25 @@ const AddForm: React.FC<PropsType> = (
         }
         setValueTask('')
     }
-
     const keyPressAddTask = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            debugger
             addTaskHandler()
         }
     }
 
     return (
         <div className={s.todo}>
-            {error ? <TextField
-                    error
-                    id="outlined-error"
-                    label="Incorrect value!"
-                    variant="outlined"
-                    onChange={newValueTask}
-                    value={valueTask}
-                    onKeyPress={keyPressAddTask}/>
-                : <TextField required id="standard-required"
-                             onChange={newValueTask}
-                             value={valueTask}
-                             onKeyPress={keyPressAddTask}/>}
+            <TextField variant="outlined"
+                       size='small'
+                       error={error}
+                       value={valueTask}
+                       label="Title"
+                       helperText={error}
+                       onChange={newValueTask}
+                       onKeyPress={keyPressAddTask}/>
             <Button onClick={addTaskHandler}
                     color='default'
+                    size='medium'
             >+
             </Button>
         </div>

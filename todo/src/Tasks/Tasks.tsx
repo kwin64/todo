@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
-import {Checkbox} from "@material-ui/core";
+import {Checkbox, IconButton} from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 type PropsType = {
     tasks: Array<TaskType>
@@ -37,12 +38,14 @@ const Tasks: React.FC<PropsType> = (
                 <Checkbox
                     defaultChecked
                     color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    inputProps={{'aria-label': 'secondary checkbox'}}
                     checked={t.isDone}
                     size='small'
                     onChange={changeStatusTaskHandler}/>
-                <button onClick={removeTaskHandler}>X
-                </button>
+                <IconButton aria-label="delete">
+                    <DeleteIcon
+                        onClick={removeTaskHandler}/>
+                </IconButton>
             </li>)
         }
     )
