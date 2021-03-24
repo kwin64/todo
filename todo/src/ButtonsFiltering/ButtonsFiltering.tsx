@@ -1,6 +1,7 @@
 import React from 'react';
 import {FilterValueType} from "../App";
 import s from '../App.module.css';
+import {Button} from "@material-ui/core";
 
 type PropsType = {
     changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
@@ -26,10 +27,21 @@ const ButtonsFiltering: React.FC<PropsType> = (
     }
     return (
         <div>
-            <button className={filter === 'all' ? s.activeButton : ''} onClick={onClickButtonAllHandler}>All</button>
-            <button className={filter === 'active'? s.activeButton : ''} onClick={onClickButtonActiveHandler}>Active</button>
-            <button className={filter === 'completed'? s.activeButton : ''} onClick={onClickButtonCompletedHandler}>Completed
-            </button>
+            <Button className={filter === 'all' ? s.activeButton : ''}
+                    variant={filter === 'all' ? 'contained' : "outlined"}
+                    size='small' color='primary'
+                    onClick={onClickButtonAllHandler}>All
+            </Button>
+            <Button className={filter === 'active' ? s.activeButton : ''}
+                    variant={filter === 'active' ? 'contained' : "outlined"}
+                    size='small' color='primary'
+                    onClick={onClickButtonActiveHandler}>Active
+            </Button>
+            <Button className={filter === 'completed' ? s.activeButton : ''}
+                    variant={filter === 'completed' ? 'contained' : "outlined"}
+                    size='small' color='primary'
+                    onClick={onClickButtonCompletedHandler}>Completed
+            </Button>
         </div>
     );
 }

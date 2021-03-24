@@ -41,16 +41,22 @@ const AddForm: React.FC<PropsType> = (
 
     return (
         <div className={s.todo}>
-            <TextField id='outlined-basic' label='Add new task' variant='outlined'
-                       onChange={newValueTask}
-                       value={valueTask}
-                       onKeyPress={keyPressAddTask}
-                       className={error ? 'outlined-error-helper-text' : ''}/>
+            {error ? <TextField
+                    error
+                    id="outlined-error"
+                    label="Incorrect value!"
+                    variant="outlined"
+                    onChange={newValueTask}
+                    value={valueTask}
+                    onKeyPress={keyPressAddTask}/>
+                : <TextField required id="standard-required"
+                             onChange={newValueTask}
+                             value={valueTask}
+                             onKeyPress={keyPressAddTask}/>}
             <Button onClick={addTaskHandler}
                     color='default'
             >+
             </Button>
-            {error && <div className={'errorMessage'}>Incorrect value!</div>}
         </div>
     )
 }

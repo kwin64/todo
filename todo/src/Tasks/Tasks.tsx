@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
+import {Checkbox} from "@material-ui/core";
 
 type PropsType = {
     tasks: Array<TaskType>
@@ -33,9 +34,13 @@ const Tasks: React.FC<PropsType> = (
 
             return (<li key={t.id} className={t.isDone ? 'isDone' : ''}>
                 <EditableTitle title={t.title} changeTitle={changeTitle}/>
-                <input type='checkbox'
-                       checked={t.isDone}
-                       onChange={changeStatusTaskHandler}/>
+                <Checkbox
+                    defaultChecked
+                    color="primary"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    checked={t.isDone}
+                    size='small'
+                    onChange={changeStatusTaskHandler}/>
                 <button onClick={removeTaskHandler}>X
                 </button>
             </li>)
