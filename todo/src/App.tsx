@@ -33,31 +33,15 @@ function App() {
         ]
     })
 
-    const addTask = (title: string, todoListsID: string) => {
-        const newTask: TaskType = {id: v1(), title: title, isDone: false}
-        tasks[todoListsID] = [newTask, ...tasks[todoListsID]]
-        setTasks({...tasks})
-    }
     const addTodoList = (title: string) => {
         const idTodoList = v1()
         const todo: TodolistType = {id: idTodoList, title, filter: 'all'}
         setTodolists([...todoLists, todo])
         setTasks({...tasks, [idTodoList]: []})
     }
-    const removeTask = (id: string, todoListsID: string) => {
-        tasks[todoListsID] = tasks[todoListsID].filter(tl => tl.id !== id)
-        setTasks({...tasks})
-    }
     const removeTodoList = (todoListsID: string) => {
         setTodolists(todoLists.filter(tl => tl.id !== todoListsID))
         delete tasks[todoListsID]
-    }
-    const changeStatusTask = (taskID: string, statusTask: boolean, todoListsID: string) => {
-        const task = tasks[todoListsID].find(t => t.id === taskID)
-        if (task) {
-            task.isDone = statusTask
-            setTasks({...tasks})
-        }
     }
     const changeTodoListFilter = (newFilterValue: FilterValueType, todoListsID: string) => {
         let todoList = todoLists.find(tl => tl.id === todoListsID)
@@ -71,6 +55,23 @@ function App() {
         if (todoList) {
             todoList.title = newTitle
             setTodolists([...todoLists])
+        }
+    }
+
+    const addTask = (title: string, todoListsID: string) => {
+        const newTask: TaskType = {id: v1(), title: title, isDone: false}
+        tasks[todoListsID] = [newTask, ...tasks[todoListsID]]
+        setTasks({...tasks})
+    }
+    const removeTask = (id: string, todoListsID: string) => {
+        tasks[todoListsID] = tasks[todoListsID].filter(tl => tl.id !== id)
+        setTasks({...tasks})
+    }
+    const changeStatusTask = (taskID: string, statusTask: boolean, todoListsID: string) => {
+        const task = tasks[todoListsID].find(t => t.id === taskID)
+        if (task) {
+            task.isDone = statusTask
+            setTasks({...tasks})
         }
     }
     const changeTasksTitle = (taskID: string, newTitle: string, todoListsID: string) => {

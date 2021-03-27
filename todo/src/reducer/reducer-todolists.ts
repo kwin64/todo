@@ -26,7 +26,7 @@ type ActionsType = AddTodolistActionType
     | ChangeTodolistFilterActionType
     | ChangeTodolistTitleActionType
 
-export const useReducer = (state: Array<TodolistType>, action: ActionsType): Array<TodolistType> => {
+export const todolistReducer = (state: Array<TodolistType>, action: ActionsType): Array<TodolistType> => {
     switch (action.type) {
         case 'ADD-TODOLIST':
             return [...state, {id: v1(), title: action.title, filter: "all"}]
