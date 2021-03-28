@@ -2,29 +2,29 @@ import React, {Dispatch} from 'react';
 import {FilterValueType} from "../App";
 import s from '../App.module.css';
 import {Button} from "@material-ui/core";
-import {ActionsType} from "../reducer/reducer-todolists";
+import {ActionsTodolistType} from "../reducer/reducer-todolists";
 
 type PropsType = {
     filter: FilterValueType
     todoListsID: string
-    dispatch: Dispatch<ActionsType>
+    dispatchTodolist: Dispatch<ActionsTodolistType>
 }
 
 const ButtonsFiltering: React.FC<PropsType> = (
     {
         filter,
         todoListsID,
-        dispatch
+        dispatchTodolist
     }
 ) => {
     const onClickButtonAllHandler = () => {
-        dispatch({type: 'CHANGE-TODOLIST-FILTER', id:todoListsID,filter:"all"})
+        dispatchTodolist({type: 'CHANGE-TODOLIST-FILTER', id:todoListsID,filter:"all"})
     }
     const onClickButtonActiveHandler = () => {
-        dispatch({type: 'CHANGE-TODOLIST-FILTER', id:todoListsID,filter:"active"})
+        dispatchTodolist({type: 'CHANGE-TODOLIST-FILTER', id:todoListsID,filter:"active"})
     }
     const onClickButtonCompletedHandler = () => {
-        dispatch({type: 'CHANGE-TODOLIST-FILTER', id:todoListsID,filter:"completed"})
+        dispatchTodolist({type: 'CHANGE-TODOLIST-FILTER', id:todoListsID,filter:"completed"})
     }
     return (
         <div>

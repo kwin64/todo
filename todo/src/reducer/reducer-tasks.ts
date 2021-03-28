@@ -4,56 +4,56 @@ import {AddTodolistActionType, RemoveTodolistActionType} from './reducer-todolis
 
 type AddTaskActionType = {
     type: 'ADD-TASK'
-    idTodoList: string
+    todoListsID: string
     title: string
 }
 type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
     id: string
-    idTodoList: string
+    todoListsID: string
 }
 type ChangeTasktStatusActionType = {
     type: 'CHANGE-TASK-STATUS'
-    idTodoList: string
+    todoListsID: string
     statusTask: boolean
     id: string
 }
 type ChangeTaskTitleActionType = {
     type: 'CHANGE-TASK-TITLE'
-    idTodoList: string
+    todoListsID: string
     title: string
     id: string
 }
 
-type ActionsType = AddTaskActionType
+export type ActionsTaskType = AddTaskActionType
     | RemoveTaskActionType
     | ChangeTasktStatusActionType
     | ChangeTaskTitleActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
 
-export const useReducer = (state: TasksStateType, action: ActionsType): TasksStateType => {
+export const tasksReducer = (state: TasksStateType, action: ActionsTaskType): TasksStateType => {
     switch (action.type) {
         case 'ADD-TASK': {
-            state[action.idTodoList] = [
+            state[action.todoListsID] = [
                 {id: v1(), title: action.title, isDone: false},
-                ...state[action.idTodoList]
+                ...state[action.todoListsID]
             ]
             return {...state}
         }
         case 'REMOVE-TASK': {
-            state[action.idTodoList].filter(t => t.id !== action.id)
+            state[action.todoListsID].filter(t => t.id !== action.id)
             return {...state}
         }
         case 'CHANGE-TASK-STATUS': {
-            const task = state[action.idTodoList].find(t => t.id === action.id)
+            const task = state[action.todoListsID].find(t => t.id === action.id)
             if (task) {
                 task.isDone = action.statusTask
             }
             return {...state}
         }
         case 'CHANGE-TASK-TITLE': {
-            const task = state[action.idTodoList].find(t => t.id === action.id)
+            const task = state[action.todoListsID].find(t => t.id === action.id)
             if (task) {
                 task.title = action.title
             }
@@ -74,15 +74,15 @@ export const useReducer = (state: TasksStateType, action: ActionsType): TasksSta
     }
 }
 
-export const addTaskAC = (title: string, idTodoList: string): AddTaskActionType => {
-    return {type: 'ADD-TASK', idTodoList, title}
+export const addTaskAC = (title: string, todoListsID: string): AddTaskActionType => {
+    return {type: 'ADD-TASK', todoListsID, title}
 }
-export const removeTodolistAC = (id: string, idTodoList: string): RemoveTaskActionType => {
-    return {type: 'REMOVE-TASK', id, idTodoList}
+export const removeTasktAC = (id: string, todoListsID: string): RemoveTaskActionType => {
+    return {type: 'REMOVE-TASK', id, todoListsID}
 }
-export const changeTodolistStatusAC = (id: string, idTodoList: string, statusTask: boolean): ChangeTasktStatusActionType => {
-    return {type: 'CHANGE-TASK-STATUS', id, idTodoList, statusTask}
+export const changeTaskStatusAC = (id: string, todoListsID: string, statusTask: boolean): ChangeTasktStatusActionType => {
+    return {type: 'CHANGE-TASK-STATUS', id, todoListsID, statusTask}
 }
-export const changeTodolistTitleAC = (id: string, idTodoList: string, title: string): ChangeTaskTitleActionType => {
-    return {type: 'CHANGE-TASK-TITLE', id, idTodoList, title}
+export const changeTaskTitleAC = (id: string, todoListsID: string, title: string): ChangeTaskTitleActionType => {
+    return {type: 'CHANGE-TASK-TITLE', id, todoListsID, title}
 }

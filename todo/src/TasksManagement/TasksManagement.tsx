@@ -3,32 +3,33 @@ import AddForm from "../AddForm";
 import EditableTitle from "../EditableTitle";
 import {IconButton} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {ActionsType} from "../reducer/reducer-todolists";
+import {ActionsTodolistType} from "../reducer/reducer-todolists";
+import {ActionsTaskType} from "../reducer/reducer-tasks";
 
 type PropsType = {
     titleTodoList: string
-    addTask: (title: string, todoListsID: string) => void
     todoListsID: string
-    dispatch: Dispatch<ActionsType>
+    dispatchTasks: Dispatch<ActionsTaskType>
+    dispatchTodolist: Dispatch<ActionsTodolistType>
 }
 
 const TasksManagement: React.FC<PropsType> = (
     {
         titleTodoList,
-        addTask,
+        dispatchTasks,
         todoListsID,
-        dispatch,
+        dispatchTodolist,
     }
 ) => {
 
     const addTaskForm = (title: string) => {
-        addTask(title, todoListsID)
+        dispatchTasks({type: 'ADD-TASK', todoListsID, title})
     }
     const removeTodoListHandler = () => {
-        dispatch({type: 'REMOVE-TODOLIST', id:todoListsID})
+        dispatchTodolist({type: 'REMOVE-TODOLIST', id: todoListsID})
     }
     const changeTitle = (title: string) => {
-        dispatch({type: 'CHANGE-TODOLIST-TITLE', id: todoListsID, title})
+        dispatchTodolist({type: 'CHANGE-TODOLIST-TITLE', id: todoListsID, title})
     }
 
     return (
@@ -40,7 +41,7 @@ const TasksManagement: React.FC<PropsType> = (
                         onClick={removeTodoListHandler}/>
                 </IconButton>
             </h3>
-            <AddForm addItemForm={addTaskForm}/>
+            <AddForm dispatchTasks={dispatchTasks}/>
         </div>
     );
 }

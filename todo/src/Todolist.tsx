@@ -4,17 +4,16 @@ import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
-import {ActionsType, RemoveTodolistActionType} from "./reducer/reducer-todolists";
+import {ActionsTodolistType} from "./reducer/reducer-todolists";
+import {ActionsTaskType} from "./reducer/reducer-tasks";
 
 type PropsType = {
     todoListsID: string
     titleTodoList: string
     tasks: Array<TaskType>
-    addTask: (title: string, todoListsID: string) => void
-    changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
     filter: FilterValueType
-    dispatch: Dispatch<ActionsType>
-    changeTasksTitle: (idTask: string, newTitle: string, todoListsID: string) => void
+    dispatchTodolist: Dispatch<ActionsTodolistType>
+    dispatchTasks: Dispatch<ActionsTaskType>
 }
 
 const TodoList: React.FC<PropsType> = (
@@ -22,11 +21,9 @@ const TodoList: React.FC<PropsType> = (
         todoListsID,
         titleTodoList,
         tasks,
-        addTask,
-        changeStatusTask,
         filter,
-        dispatch,
-        changeTasksTitle,
+        dispatchTodolist,
+        dispatchTasks
     }
 ) => {
 
@@ -34,18 +31,15 @@ const TodoList: React.FC<PropsType> = (
         <div className={s.todo}>
             <TasksManagement todoListsID={todoListsID}
                              titleTodoList={titleTodoList}
-                             addTask={addTask}
-                             dispatch={dispatch}
+                             dispatchTasks={dispatchTasks}
+                             dispatchTodolist={dispatchTodolist}
             />
             <Tasks todoListsID={todoListsID}
                    tasks={tasks}
-                   dispatch={dispatch}
-                   changeStatusTask={changeStatusTask}
-                   changeTasksTitle={changeTasksTitle}
-                   removeTask={}
+                   dispatchTasks={dispatchTasks}
             />
             <ButtonsFiltering todoListsID={todoListsID}
-                              dispatch={dispatch}
+                              dispatchTodolist={dispatchTodolist}
                               filter={filter}
             />
         </div>
