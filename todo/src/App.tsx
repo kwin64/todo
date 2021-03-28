@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import {v1} from 'uuid';
 import Todolists from './Todolists';
 import AddForm from "./AddForm";
+import {todolistReducer} from "./reducer/reducer-todolists";
 
 export type TaskType = { id: string, title: string, isDone: boolean }
 export type TasksStateType = {
@@ -33,16 +34,19 @@ function App() {
         ]
     })
 
+    const [state, dispatch] = useReducer(todolistReducer, todoLists)
+    console.log(dispatch)
+
     const addTodoList = (title: string) => {
         const idTodoList = v1()
         const todo: TodolistType = {id: idTodoList, title, filter: 'all'}
         setTodolists([...todoLists, todo])
         setTasks({...tasks, [idTodoList]: []})
     }
-    const removeTodoList = (todoListsID: string) => {
-        setTodolists(todoLists.filter(tl => tl.id !== todoListsID))
-        delete tasks[todoListsID]
-    }
+    // const removeTodoList = (todoListsID: string) => {
+    //     setTodolists(todoLists.filter(tl => tl.id !== todoListsID))
+    //     delete tasks[todoListsID]
+    // }
     const changeTodoListFilter = (newFilterValue: FilterValueType, todoListsID: string) => {
         let todoList = todoLists.find(tl => tl.id === todoListsID)
         if (todoList) {
@@ -91,9 +95,10 @@ function App() {
                        removeTask={removeTask}
                        changeTodoListFilter={changeTodoListFilter}
                        changeStatusTask={changeStatusTask}
-                       removeTodoList={removeTodoList}
+                       dispatch={dispatch}
                        changeTodoListTitle={changeTodoListTitle}
-                       changeTasksTitle={changeTasksTitle}/>
+                       changeTasksTitle={changeTasksTitle}
+            />
         </div>
     );
 }

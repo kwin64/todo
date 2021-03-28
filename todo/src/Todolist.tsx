@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
 import s from './App.module.css';
 import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
+import {RemoveTodolistActionType} from "./reducer/reducer-todolists";
 
 type PropsType = {
     todoListsID: string
     titleTodoList: string
     tasks: Array<TaskType>
     addTask: (title: string, todoListsID: string) => void
-    removeTask: (id: string, todoListsID: string) => void
+    dispatch:  number
     changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
     removeTodoList: (todoListsID: string) => void
@@ -25,13 +26,13 @@ const TodoList: React.FC<PropsType> = (
         titleTodoList,
         tasks,
         addTask,
-        removeTask,
         changeTodoListFilter,
         changeStatusTask,
         removeTodoList,
         filter,
         changeTodoListTitle,
-        changeTasksTitle
+        changeTasksTitle,
+        dispatch
     }
 ) => {
 
@@ -45,7 +46,7 @@ const TodoList: React.FC<PropsType> = (
             />
             <Tasks todoListsID={todoListsID}
                    tasks={tasks}
-                   removeTask={removeTask}
+                   dispatch={dispatch}
                    changeStatusTask={changeStatusTask}
                    changeTasksTitle={changeTasksTitle}
             />

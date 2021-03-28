@@ -26,7 +26,7 @@ const TasksManagement: React.FC<PropsType> = (
         addTask(title, todoListsID)
     }
     const removeTodoListHandler = () => {
-        removeTodoList(todoListsID)
+        dispatch({type:'REMOVE-TODOLIST'})
     }
     const changeTitle = (title: string) => {
         changeTodoListTitle(title, todoListsID)
