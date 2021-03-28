@@ -1,8 +1,9 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, Dispatch} from 'react';
 import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
 import {Checkbox, IconButton} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
+import {ActionsType} from "../reducer/reducer-todolists";
 
 type PropsType = {
     tasks: Array<TaskType>
@@ -10,6 +11,7 @@ type PropsType = {
     removeTask: (id: string, todoListsID: string) => void
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
     changeTasksTitle: (idTask: string, newTitle: string, todoListsID: string) => void
+    dispatch: Dispatch<ActionsType>
 }
 
 const Tasks: React.FC<PropsType> = (
@@ -18,7 +20,8 @@ const Tasks: React.FC<PropsType> = (
         todoListsID,
         removeTask,
         changeStatusTask,
-        changeTasksTitle
+        changeTasksTitle,
+        dispatch
     }
 ) => {
 

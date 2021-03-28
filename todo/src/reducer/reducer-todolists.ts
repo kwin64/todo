@@ -21,7 +21,7 @@ type ChangeTodolistTitleActionType = {
     id: string
 }
 
-type ActionsType = AddTodolistActionType
+export type ActionsType = AddTodolistActionType
     | RemoveTodolistActionType
     | ChangeTodolistFilterActionType
     | ChangeTodolistTitleActionType

@@ -16,7 +16,6 @@ function App() {
 
     const firstTodo = v1()
     const secondTodo = v1()
-
     const [todoLists, setTodolists] = useState<Array<TodolistType>>([
         {id: firstTodo, title: 'First todo', filter: 'all'},
         {id: secondTodo, title: 'Second todo', filter: 'all'}
@@ -47,20 +46,20 @@ function App() {
     //     setTodolists(todoLists.filter(tl => tl.id !== todoListsID))
     //     delete tasks[todoListsID]
     // }
-    const changeTodoListFilter = (newFilterValue: FilterValueType, todoListsID: string) => {
-        let todoList = todoLists.find(tl => tl.id === todoListsID)
-        if (todoList) {
-            todoList.filter = newFilterValue
-            setTodolists([...todoLists])
-        }
-    }
-    const changeTodoListTitle = (newTitle: string, todoListsID: string) => {
-        let todoList = todoLists.find(tl => tl.id === todoListsID)
-        if (todoList) {
-            todoList.title = newTitle
-            setTodolists([...todoLists])
-        }
-    }
+    // const changeTodoListFilter = (newFilterValue: FilterValueType, todoListsID: string) => {
+    //     let todoList = todoLists.find(tl => tl.id === todoListsID)
+    //     if (todoList) {
+    //         todoList.filter = newFilterValue
+    //         setTodolists([...todoLists])
+    //     }
+    // }
+    // const changeTodoListTitle = (newTitle: string, todoListsID: string) => {
+    //     let todoList = todoLists.find(tl => tl.id === todoListsID)
+    //     if (todoList) {
+    //         todoList.title = newTitle
+    //         setTodolists([...todoLists])
+    //     }
+    // }
 
     const addTask = (title: string, todoListsID: string) => {
         const newTask: TaskType = {id: v1(), title: title, isDone: false}
@@ -93,10 +92,8 @@ function App() {
                        tasks={tasks}
                        addTask={addTask}
                        removeTask={removeTask}
-                       changeTodoListFilter={changeTodoListFilter}
                        changeStatusTask={changeStatusTask}
                        dispatch={dispatch}
-                       changeTodoListTitle={changeTodoListTitle}
                        changeTasksTitle={changeTasksTitle}
             />
         </div>

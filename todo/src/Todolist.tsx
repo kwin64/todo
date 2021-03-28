@@ -4,19 +4,16 @@ import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
-import {RemoveTodolistActionType} from "./reducer/reducer-todolists";
+import {ActionsType, RemoveTodolistActionType} from "./reducer/reducer-todolists";
 
 type PropsType = {
     todoListsID: string
     titleTodoList: string
     tasks: Array<TaskType>
     addTask: (title: string, todoListsID: string) => void
-    dispatch:  number
-    changeTodoListFilter: (filterValue: FilterValueType, id: string) => void
     changeStatusTask: (taskID: string, statusTask: boolean, todoListsID: string) => void
-    removeTodoList: (todoListsID: string) => void
     filter: FilterValueType
-    changeTodoListTitle: (newTitle: string, todoListsID: string) => void
+    dispatch: Dispatch<ActionsType>
     changeTasksTitle: (idTask: string, newTitle: string, todoListsID: string) => void
 }
 
@@ -26,13 +23,10 @@ const TodoList: React.FC<PropsType> = (
         titleTodoList,
         tasks,
         addTask,
-        changeTodoListFilter,
         changeStatusTask,
-        removeTodoList,
         filter,
-        changeTodoListTitle,
+        dispatch,
         changeTasksTitle,
-        dispatch
     }
 ) => {
 
@@ -41,17 +35,17 @@ const TodoList: React.FC<PropsType> = (
             <TasksManagement todoListsID={todoListsID}
                              titleTodoList={titleTodoList}
                              addTask={addTask}
-                             removeTodoList={removeTodoList}
-                             changeTodoListTitle={changeTodoListTitle}
+                             dispatch={dispatch}
             />
             <Tasks todoListsID={todoListsID}
                    tasks={tasks}
                    dispatch={dispatch}
                    changeStatusTask={changeStatusTask}
                    changeTasksTitle={changeTasksTitle}
+                   removeTask={}
             />
             <ButtonsFiltering todoListsID={todoListsID}
-                              changeTodoListFilter={changeTodoListFilter}
+                              dispatch={dispatch}
                               filter={filter}
             />
         </div>
