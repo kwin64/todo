@@ -2,19 +2,21 @@ import React, {Dispatch, KeyboardEvent, useState} from 'react';
 import s from "./App.module.css";
 import Button from '@material-ui/core/Button';
 import {TextField} from "@material-ui/core";
-import {ActionsTodolistType} from "./reducer/reducer-todolists";
+import {ActionsTodolistType, addTodolistAC} from "./reducer/reducer-todolists";
 import {v1} from "uuid";
 import {ActionsTaskType} from "./reducer/reducer-tasks";
 
 type PropsType = {
-    dispatchTodolist: Dispatch<ActionsTodolistType>
-    dispatchTasks: Dispatch<ActionsTaskType>
+    //dispatchTodolist: Dispatch<ActionsTodolistType>
+    // dispatchTasks: Dispatch<ActionsTaskType>
+    addItem: (text: string) => void
 }
 
 const AddForm: React.FC<PropsType> = (
     {
-        dispatchTodolist,
-        dispatchTasks
+        //dispatchTodolist,
+        // dispatchTasks
+        addItem
     }
 ) => {
 
@@ -29,7 +31,7 @@ const AddForm: React.FC<PropsType> = (
     const addTaskHandler = () => {
         const trimmedValueTask = valueTask.trim()
         if (trimmedValueTask) {
-            dispatchTodolist({type:'ADD-TODOLIST',title:trimmedValueTask, idTodolist: v1()})
+            addItem(trimmedValueTask)
         } else {
             setError(true)
         }

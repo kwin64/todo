@@ -2,7 +2,7 @@ import React, {useReducer, useState} from 'react';
 import {v1} from 'uuid';
 import Todolists from './Todolists';
 import AddForm from "./AddForm";
-import {todolistReducer} from "./reducer/reducer-todolists";
+import {addTodolistAC, todolistReducer} from "./reducer/reducer-todolists";
 import {tasksReducer} from "./reducer/reducer-tasks";
 
 export type TaskType = { id: string, title: string, isDone: boolean }
@@ -36,6 +36,12 @@ function App() {
 
     const [todolistsState, dispatchTodolist] = useReducer(todolistReducer, todoLists)
     const [tasksState, dispatchTasks] = useReducer(tasksReducer, tasks)
+
+    const addTodolist = (title: string) => {
+        let action = addTodolistAC(title)
+        dispatchTodolist(action)
+        dispatchTasks(action)
+    }
 
     // const addTodoList = (title: string) => {
     //     const idTodoList = v1()
@@ -88,7 +94,7 @@ function App() {
 
     return (
         <div>
-            <AddForm dispatchTodolist={dispatchTodolist}/>
+            <AddForm addItem={addTodolist}/>
             <Todolists todoListsComponents={todoLists}
                        tasks={tasks}
                        dispatchTodolist={dispatchTodolist}

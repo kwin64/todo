@@ -4,7 +4,7 @@ import EditableTitle from "../EditableTitle";
 import {IconButton} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {ActionsTodolistType} from "../reducer/reducer-todolists";
-import {ActionsTaskType} from "../reducer/reducer-tasks";
+import {ActionsTaskType, addTaskAC} from "../reducer/reducer-tasks";
 
 type PropsType = {
     titleTodoList: string
@@ -22,11 +22,12 @@ const TasksManagement: React.FC<PropsType> = (
     }
 ) => {
 
-    const addTaskForm = (title: string) => {
-        dispatchTasks({type: 'ADD-TASK', todoListsID, title})
+    const addTask = (title: string) => {
+        dispatchTasks(addTaskAC(title, todoListsID))
     }
     const removeTodoListHandler = () => {
-        dispatchTodolist({type: 'REMOVE-TODOLIST', id: todoListsID})
+        dispatchTodolist()
+        dispatchTasks()
     }
     const changeTitle = (title: string) => {
         dispatchTodolist({type: 'CHANGE-TODOLIST-TITLE', id: todoListsID, title})
@@ -41,7 +42,7 @@ const TasksManagement: React.FC<PropsType> = (
                         onClick={removeTodoListHandler}/>
                 </IconButton>
             </h3>
-            <AddForm dispatchTasks={dispatchTasks}/>
+            <AddForm addItem={addTask}/>
         </div>
     );
 }
