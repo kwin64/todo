@@ -14,9 +14,12 @@ type PropsType = {
     filter: FilterValueType
     dispatchTodolist: Dispatch<ActionsTodolistType>
     dispatchTasks: Dispatch<ActionsTaskType>
-    addTask: (title: string)=> void
-    removeTodoListHandler: ()=> void
-    changeTitleTodoList: (newTitle: string)=> void
+    addTask: (title: string) => void
+    removeTodoListHandler: () => void
+    changeTitleTodoList: (newTitle: string) => void
+    onClickButtonAllHandler: () => void
+    onClickButtonActiveHandler: () => void
+    onClickButtonCompletedHandler: () => void
 }
 
 const TodoList: React.FC<PropsType> = (
@@ -25,20 +28,19 @@ const TodoList: React.FC<PropsType> = (
         titleTodoList,
         tasks,
         filter,
-        dispatchTodolist,
         dispatchTasks,
         addTask,
         removeTodoListHandler,
-        changeTitleTodoList
+        changeTitleTodoList,
+        onClickButtonAllHandler,
+        onClickButtonActiveHandler,
+        onClickButtonCompletedHandler
     }
 ) => {
 
     return (
         <div className={s.todo}>
-            <TasksManagement todoListsID={todoListsID}
-                             titleTodoList={titleTodoList}
-                             dispatchTasks={dispatchTasks}
-                             dispatchTodolist={dispatchTodolist}
+            <TasksManagement titleTodoList={titleTodoList}
                              addTask={addTask}
                              removeTodoListHandler={removeTodoListHandler}
                              changeTitleTodoList={changeTitleTodoList}
@@ -47,9 +49,10 @@ const TodoList: React.FC<PropsType> = (
                    tasks={tasks}
                    dispatchTasks={dispatchTasks}
             />
-            <ButtonsFiltering todoListsID={todoListsID}
-                              dispatchTodolist={dispatchTodolist}
-                              filter={filter}
+            <ButtonsFiltering filter={filter}
+                              onClickButtonAllHandler={onClickButtonAllHandler}
+                              onClickButtonActiveHandler={onClickButtonActiveHandler}
+                              onClickButtonCompletedHandler={onClickButtonCompletedHandler}
             />
         </div>
     );

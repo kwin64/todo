@@ -1,16 +1,11 @@
-import React, {Dispatch} from 'react';
+import React from 'react';
 import AddForm from "../AddForm";
 import EditableTitle from "../EditableTitle";
 import {IconButton} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {ActionsTodolistType} from "../reducer/reducer-todolists";
-import {ActionsTaskType} from "../reducer/reducer-tasks";
 
 type PropsType = {
     titleTodoList: string
-    todoListsID: string
-    dispatchTasks: Dispatch<ActionsTaskType>
-    dispatchTodolist: Dispatch<ActionsTodolistType>
     addTask: (newTitle: string) => void
     removeTodoListHandler: () => void
     changeTitleTodoList: (title: string)=> void

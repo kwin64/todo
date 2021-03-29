@@ -1,7 +1,13 @@
 import React, {useReducer, useState} from 'react';
 import {v1} from 'uuid';
 import AddForm from "./AddForm";
-import {addTodolistAC, changeTodolistTitleAC, removeTodolistAC, todolistReducer} from "./reducer/reducer-todolists";
+import {
+    addTodolistAC,
+    changeTodolistFilterAC,
+    changeTodolistTitleAC,
+    removeTodolistAC,
+    todolistReducer
+} from "./reducer/reducer-todolists";
 import {addTaskAC, tasksReducer} from "./reducer/reducer-tasks";
 import {Box} from "@material-ui/core";
 import TodoList from "./Todolist";
@@ -100,6 +106,8 @@ function App() {
             if (tl.filter === 'completed') {
                 tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
             }
+
+            //TasksManagement
             const addTask = (title: string) => {
                 dispatchTasks(addTaskAC(title, tl.id))
             }
@@ -110,6 +118,30 @@ function App() {
             }
             const changeTitleTodoList = (newTitle: string) => {
                 dispatchTodolist(changeTodolistTitleAC(tl.id, newTitle))
+            }
+
+            //Tasks
+            // const taskItemsHadlers = tasksForTodoLists.map(t => {
+            //     const removeTaskHandler = () => {
+            //         dispatchTasks(removeTasktAC(t.id, tl.id))
+            //     }
+            //     const changeStatusTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
+            //         dispatchTasks(changeTaskStatusAC(t.id, tl.id, e.currentTarget.checked))
+            //     }
+            //     const changeTitle = (title: string) => {
+            //         dispatchTasks(changeTaskTitleAC(t.id, tl.id, title))
+            //     }
+            // })
+
+            //ButtonsFiltering
+            const onClickButtonAllHandler = () => {
+                dispatchTodolist(changeTodolistFilterAC(tl.id, "all"))
+            }
+            const onClickButtonActiveHandler = () => {
+                dispatchTodolist(changeTodolistFilterAC(tl.id, "active"))
+            }
+            const onClickButtonCompletedHandler = () => {
+                dispatchTodolist(changeTodolistFilterAC(tl.id, "completed"))
             }
             return (
                 <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'}>
@@ -122,6 +154,9 @@ function App() {
                               addTask={addTask}
                               removeTodoListHandler={removeTodoListHandler}
                               changeTitleTodoList={changeTitleTodoList}
+                              onClickButtonAllHandler={onClickButtonAllHandler}
+                              onClickButtonActiveHandler={onClickButtonActiveHandler}
+                              onClickButtonCompletedHandler={onClickButtonCompletedHandler}
                     />
                 </Box>
             )
