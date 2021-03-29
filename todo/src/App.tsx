@@ -1,9 +1,10 @@
 import React, {useReducer, useState} from 'react';
 import {v1} from 'uuid';
-import Todolists from './Todolists';
 import AddForm from "./AddForm";
-import {addTodolistAC, todolistReducer} from "./reducer/reducer-todolists";
-import {tasksReducer} from "./reducer/reducer-tasks";
+import {addTodolistAC, changeTodolistTitleAC, removeTodolistAC, todolistReducer} from "./reducer/reducer-todolists";
+import {addTaskAC, tasksReducer} from "./reducer/reducer-tasks";
+import {Box} from "@material-ui/core";
+import TodoList from "./Todolist";
 
 export type TaskType = { id: string, title: string, isDone: boolean }
 export type TasksStateType = {
@@ -67,7 +68,6 @@ function App() {
     //         setTodolists([...todoLists])
     //     }
     // }
-
     // const addTask = (title: string, todoListsID: string) => {
     //     const newTask: TaskType = {id: v1(), title: title, isDone: false}
     //     tasks[todoListsID] = [newTask, ...tasks[todoListsID]]
@@ -92,14 +92,45 @@ function App() {
     //     }
     // }
 
+    const todoListsItem = todoLists.map(tl => {
+            let tasksForTodoLists = tasks[tl.id]
+            if (tl.filter === 'active') {
+                tasksForTodoLists = tasksForTodoLists.filter(t => !t.isDone)
+            }
+            if (tl.filter === 'completed') {
+                tasksForTodoLists = tasksForTodoLists.filter(t => t.isDone)
+            }
+            const addTask = (title: string) => {
+                dispatchTasks(addTaskAC(title, tl.id))
+            }
+            const removeTodoListHandler = () => {
+                let action = removeTodolistAC(tl.id)
+                dispatchTodolist(action)
+                dispatchTasks(action)
+            }
+            const changeTitleTodoList = (newTitle: string) => {
+                dispatchTodolist(changeTodolistTitleAC(tl.id, newTitle))
+            }
+            return (
+                <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'}>
+                    <TodoList todoListsID={tl.id}
+                              titleTodoList={tl.title}
+                              filter={tl.filter}
+                              tasks={tasksForTodoLists}
+                              dispatchTodolist={dispatchTodolist}
+                              dispatchTasks={dispatchTasks}
+                              addTask={addTask}
+                              removeTodoListHandler={removeTodoListHandler}
+                              changeTitleTodoList={changeTitleTodoList}
+                    />
+                </Box>
+            )
+        }
+    )
     return (
         <div>
-            <AddForm addItem={addTodolist}/>
-            <Todolists todoListsComponents={todoLists}
-                       tasks={tasks}
-                       dispatchTodolist={dispatchTodolist}
-                       dispatchTasks={dispatchTasks}
-            />
+            <AddForm addItemForm={addTodolist}/>
+            {todoListsItem}
         </div>
     );
 }

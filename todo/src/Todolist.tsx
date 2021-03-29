@@ -14,6 +14,9 @@ type PropsType = {
     filter: FilterValueType
     dispatchTodolist: Dispatch<ActionsTodolistType>
     dispatchTasks: Dispatch<ActionsTaskType>
+    addTask: (title: string)=> void
+    removeTodoListHandler: ()=> void
+    changeTitleTodoList: (newTitle: string)=> void
 }
 
 const TodoList: React.FC<PropsType> = (
@@ -23,7 +26,10 @@ const TodoList: React.FC<PropsType> = (
         tasks,
         filter,
         dispatchTodolist,
-        dispatchTasks
+        dispatchTasks,
+        addTask,
+        removeTodoListHandler,
+        changeTitleTodoList
     }
 ) => {
 
@@ -33,6 +39,9 @@ const TodoList: React.FC<PropsType> = (
                              titleTodoList={titleTodoList}
                              dispatchTasks={dispatchTasks}
                              dispatchTodolist={dispatchTodolist}
+                             addTask={addTask}
+                             removeTodoListHandler={removeTodoListHandler}
+                             changeTitleTodoList={changeTitleTodoList}
             />
             <Tasks todoListsID={todoListsID}
                    tasks={tasks}

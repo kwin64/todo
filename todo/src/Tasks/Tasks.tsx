@@ -3,7 +3,7 @@ import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
 import {Checkbox, IconButton} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
-import {ActionsTaskType} from "../reducer/reducer-tasks";
+import {ActionsTaskType, changeTaskStatusAC, changeTaskTitleAC, removeTasktAC} from "../reducer/reducer-tasks";
 
 type PropsType = {
     tasks: Array<TaskType>
@@ -21,13 +21,13 @@ const Tasks: React.FC<PropsType> = (
 
     const tasksItems = tasks.map(t => {
             const removeTaskHandler = () => {
-                dispatchTasks({type: 'REMOVE-TASK', id:t.id, todoListsID})
+                dispatchTasks(removeTasktAC(t.id, todoListsID))
             }
             const changeStatusTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                dispatchTasks({type: 'CHANGE-TASK-STATUS', id:t.id, todoListsID, statusTask:e.currentTarget.checked})
+                dispatchTasks(changeTaskStatusAC(t.id, todoListsID, e.currentTarget.checked))
             }
             const changeTitle = (title: string) => {
-                dispatchTasks({type: 'CHANGE-TASK-TITLE', id:t.id, todoListsID, title})
+                dispatchTasks(changeTaskTitleAC(t.id, todoListsID, title))
             }
 
             return (<li key={t.id} className={t.isDone ? 'isDone' : ''}>
