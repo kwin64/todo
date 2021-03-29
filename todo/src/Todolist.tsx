@@ -4,7 +4,6 @@ import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
-import {ActionsTodolistType} from "./reducer/reducer-todolists";
 import {ActionsTaskType} from "./reducer/reducer-tasks";
 
 type PropsType = {
@@ -12,7 +11,6 @@ type PropsType = {
     titleTodoList: string
     tasks: Array<TaskType>
     filter: FilterValueType
-    dispatchTodolist: Dispatch<ActionsTodolistType>
     dispatchTasks: Dispatch<ActionsTaskType>
     addTask: (title: string) => void
     removeTodoListHandler: () => void

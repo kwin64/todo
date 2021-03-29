@@ -109,7 +109,7 @@ function App() {
 
             //TasksManagement
             const addTask = (title: string) => {
-                dispatchTasks(addTaskAC(title, tl.id))
+                dispatchTasks(addTaskAC(tl.id, title))
             }
             const removeTodoListHandler = () => {
                 let action = removeTodolistAC(tl.id)
@@ -149,7 +149,6 @@ function App() {
                               titleTodoList={tl.title}
                               filter={tl.filter}
                               tasks={tasksForTodoLists}
-                              dispatchTodolist={dispatchTodolist}
                               dispatchTasks={dispatchTasks}
                               addTask={addTask}
                               removeTodoListHandler={removeTodoListHandler}
