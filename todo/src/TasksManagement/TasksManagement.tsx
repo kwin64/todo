@@ -24,7 +24,8 @@ const TasksManagement: React.FC<PropsType> = (
     return (
         <div>
             <h3>
-                <EditableTitle title={titleTodoList} changeTitle={changeTitleTodoList}/>
+                <EditableTitle title={titleTodoList}
+                               changeTitle={changeTitleTodoList}/>
                 <IconButton aria-label="delete">
                     <DeleteIcon
                         onClick={removeTodoListHandler}/>

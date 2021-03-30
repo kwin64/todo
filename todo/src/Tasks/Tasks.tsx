@@ -19,6 +19,7 @@ const Tasks: React.FC<PropsType> = (
     }
 ) => {
 
+
     const tasksItems = tasks.map(t => {
             const removeTaskHandler = () => {
                 dispatchTasks(removeTasktAC(t.id, todoListsID))
@@ -30,8 +31,10 @@ const Tasks: React.FC<PropsType> = (
                 dispatchTasks(changeTaskTitleAC(t.id, todoListsID, title))
             }
 
-            return (<li key={t.id} className={t.isDone ? 'isDone' : ''}>
-                <EditableTitle title={t.title} changeTitle={changeTitle}/>
+            return (<li key={t.id}
+                        className={t.isDone ? 'isDone' : ''}>
+                <EditableTitle title={t.title}
+                               changeTitle={changeTitle}/>
                 <Checkbox
                     defaultChecked
                     color="primary"
