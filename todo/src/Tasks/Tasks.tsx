@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Dispatch} from 'react';
+import React, {ChangeEvent, Dispatch, useCallback} from 'react';
 import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
 import {Checkbox, IconButton} from "@material-ui/core";
@@ -18,7 +18,6 @@ const Tasks: React.FC<PropsType> = (
         dispatchTasks
     }
 ) => {
-
 
     const tasksItems = tasks.map(t => {
             const removeTaskHandler = () => {

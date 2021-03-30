@@ -8,8 +8,7 @@ type PropsType = {
     titleTodoList: string
     addTask: (newTitle: string) => void
     removeTodoListHandler: () => void
-    changeTitleTodoList: (title: string)=> void
-
+    changeTitleTodoList: (title: string) => void
 }
 
 const TasksManagement: React.FC<PropsType> = (

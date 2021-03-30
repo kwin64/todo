@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useCallback, useMemo, useReducer} from 'react';
 import {v1} from 'uuid';
 import AddForm from "./AddForm";
 import {
@@ -41,6 +41,13 @@ function App() {
             {id: v1(), title: 'Work', isDone: true},
         ]
     })
+    const todolists = useMemo(()=>
+
+    const addTodolistCallback = useCallback(
+        () => {
+            addTodolist(title)
+        }, [title]
+    )
 
     const addTodolist = (title: string) => {
         let action = addTodolistAC(title)
