@@ -6,7 +6,7 @@ import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
 import {ActionsTaskType} from "./reducer/reducer-tasks";
 
-type PropsType = {
+export type PropsType = {
     todoListsID: string
     titleTodoList: string
     tasks: Array<TaskType>

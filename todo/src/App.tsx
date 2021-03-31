@@ -41,13 +41,13 @@ function App() {
             {id: v1(), title: 'Work', isDone: true},
         ]
     })
-    const todolists = useMemo(()=>
-
-    const addTodolistCallback = useCallback(
-        () => {
-            addTodolist(title)
-        }, [title]
-    )
+    // const todolists = useMemo(()=>
+    //
+    // const addTodolistCallback = useCallback(
+    //     () => {
+    //         addTodolist(title)
+    //     }, [title]
+    // )
 
     const addTodolist = (title: string) => {
         let action = addTodolistAC(title)
