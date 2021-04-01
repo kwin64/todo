@@ -78,6 +78,12 @@ function App() {
             }
 
             //ButtonsFiltering
+            const memoizedOnClickButtonAllHandler = useCallback(
+                () => {
+                    onClickButtonAllHandler()
+                },
+                [tl.id, todolistsState.find(tl => tl.filter)]
+            )
             const onClickButtonAllHandler = () => {
                 dispatchTodolist(changeTodolistFilterAC(tl.id, "all"))
             }
