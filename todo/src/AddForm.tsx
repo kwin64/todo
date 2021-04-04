@@ -12,7 +12,7 @@ const AddForm: React.FC<PropsType> = (
         addItemForm
     }
 ) => {
-    console.log('rendering')
+    console.log('addForm')
     const [error, setError] = useState<boolean>(false)
     const [valueTask, setValueTask] = useState<string>('')
 

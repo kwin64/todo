@@ -22,6 +22,8 @@ export type TodolistType = { id: string, title: string, filter: FilterValueType 
 
 function App() {
 
+    console.log('APP')
+
     const firstTodo = v1()
     const secondTodo = v1()
 
@@ -41,19 +43,15 @@ function App() {
             {id: v1(), title: 'Work', isDone: true},
         ]
     })
-    // const todolists = useMemo(()=>
-    //
-    // const addTodolistCallback = useCallback(
-    //     () => {
-    //         addTodolist(title)
-    //     }, [title]
-    // )
-
-    const addTodolist = (title: string) => {
+    const memoizedAddTodolist = useCallback((title: string) => {
         let action = addTodolistAC(title)
         dispatchTodolist(action)
         dispatchTasks(action)
-    }
+    }, [])
+
+    // const memoizedOnClickButtonAllHandler = useCallback((todolistId: string) => {
+    //     dispatchTodolist(changeTodolistFilterAC(todolistId, "all"))
+    // }, [])
 
     const todoListsItem = todolistsState.map(tl => {
             let tasksForTodoLists = tasksState[tl.id]
@@ -78,12 +76,8 @@ function App() {
             }
 
             //ButtonsFiltering
-            const memoizedOnClickButtonAllHandler = useCallback(
-                () => {
-                    onClickButtonAllHandler()
-                },
-                [tl.id, todolistsState.find(tl => tl.filter)]
-            )
+
+
             const onClickButtonAllHandler = () => {
                 dispatchTodolist(changeTodolistFilterAC(tl.id, "all"))
             }
@@ -113,7 +107,7 @@ function App() {
     )
     return (
         <div>
-            <AddForm addItemForm={addTodolist}/>
+            <AddForm addItemForm={memoizedAddTodolist}/>
             {todoListsItem}
         </div>
     );
