@@ -43,6 +43,7 @@ function App() {
             {id: v1(), title: 'Work', isDone: true},
         ]
     })
+
     const memoizedAddTodolist = useCallback((title: string) => {
         let action = addTodolistAC(title)
         dispatchTodolist(action)
