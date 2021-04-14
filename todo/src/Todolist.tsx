@@ -4,7 +4,7 @@ import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
 import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
-import {ActionsTaskType} from "./reducer/reducer-tasks";
+import {ActionsTaskType} from "./Redux/reducers/reducer-tasks";
 
 export type PropsType = {
     todoListsID: string
@@ -20,7 +20,7 @@ export type PropsType = {
     onClickButtonCompletedHandler: () => void
 }
 
-const TodoList: React.FC<PropsType> = (
+const TodoList: React.FC<PropsType> = React.memo((
     {
         todoListsID,
         titleTodoList,
@@ -34,26 +34,27 @@ const TodoList: React.FC<PropsType> = (
         onClickButtonActiveHandler,
         onClickButtonCompletedHandler
     }
-) => {
+    ) => {
 
-    return (
-        <div className={s.todo}>
-            <TasksManagement titleTodoList={titleTodoList}
-                             addTask={addTask}
-                             removeTodoListHandler={removeTodoListHandler}
-                             changeTitleTodoList={changeTitleTodoList}
-            />
-            <Tasks todoListsID={todoListsID}
-                   tasks={tasks}
-                   dispatchTasks={dispatchTasks}
-            />
-            <ButtonsFiltering filter={filter}
-                              onClickButtonAllHandler={onClickButtonAllHandler}
-                              onClickButtonActiveHandler={onClickButtonActiveHandler}
-                              onClickButtonCompletedHandler={onClickButtonCompletedHandler}
-            />
-        </div>
-    );
-}
+        return (
+            <div className={s.todo}>
+                <TasksManagement titleTodoList={titleTodoList}
+                                 addTask={addTask}
+                                 removeTodoListHandler={removeTodoListHandler}
+                                 changeTitleTodoList={changeTitleTodoList}
+                />
+                <Tasks todoListsID={todoListsID}
+                       tasks={tasks}
+                       dispatchTasks={dispatchTasks}
+                />
+                <ButtonsFiltering filter={filter}
+                                  onClickButtonAllHandler={onClickButtonAllHandler}
+                                  onClickButtonActiveHandler={onClickButtonActiveHandler}
+                                  onClickButtonCompletedHandler={onClickButtonCompletedHandler}
+                />
+            </div>
+        );
+    }
+)
 
 export default TodoList;

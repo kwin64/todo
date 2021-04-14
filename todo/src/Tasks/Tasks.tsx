@@ -3,7 +3,7 @@ import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
 import {Checkbox, IconButton} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
-import {ActionsTaskType, changeTaskStatusAC, changeTaskTitleAC, removeTasktAC} from "../reducer/reducer-tasks";
+import {ActionsTaskType, changeTaskStatusAC, changeTaskTitleAC, removeTasktAC} from "../Redux/reducers/reducer-tasks";
 
 type PropsType = {
     tasks: Array<TaskType>

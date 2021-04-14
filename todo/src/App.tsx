@@ -7,10 +7,11 @@ import {
     changeTodolistTitleAC,
     removeTodolistAC,
     todolistReducer
-} from "./reducer/reducer-todolists";
-import {addTaskAC, tasksReducer} from "./reducer/reducer-tasks";
+} from "./Redux/reducers/reducer-todolists";
+import {addTaskAC, tasksReducer} from "./Redux/reducers/reducer-tasks";
 import {Box} from "@material-ui/core";
 import TodoList from "./Todolist";
+import { useSelector } from 'react-redux';
 
 export type TaskType = { id: string, title: string, isDone: boolean }
 export type TasksStateType = {
@@ -21,8 +22,6 @@ export type FilterValueType = 'all' | 'active' | 'completed'
 export type TodolistType = { id: string, title: string, filter: FilterValueType }
 
 function App() {
-
-    console.log('APP')
 
     const firstTodo = v1()
     const secondTodo = v1()
@@ -44,15 +43,15 @@ function App() {
         ]
     })
 
-    const memoizedAddTodolist = useCallback((title: string) => {
+    const state = useSelector<AppRoo>(state => state)
+
+    console.log(state)
+
+    const addTodolist = useCallback((title: string) => {
         let action = addTodolistAC(title)
         dispatchTodolist(action)
         dispatchTasks(action)
     }, [])
-
-    // const memoizedOnClickButtonAllHandler = useCallback((todolistId: string) => {
-    //     dispatchTodolist(changeTodolistFilterAC(todolistId, "all"))
-    // }, [])
 
     const todoListsItem = todolistsState.map(tl => {
             let tasksForTodoLists = tasksState[tl.id]
@@ -77,8 +76,6 @@ function App() {
             }
 
             //ButtonsFiltering
-
-
             const onClickButtonAllHandler = () => {
                 dispatchTodolist(changeTodolistFilterAC(tl.id, "all"))
             }
@@ -108,7 +105,7 @@ function App() {
     )
     return (
         <div>
-            <AddForm addItemForm={memoizedAddTodolist}/>
+            <AddForm addItemForm={addTodolist}/>
             {todoListsItem}
         </div>
     );
