@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {FilterValueType, TodolistType} from "../../App";
+import {FilterValueType, TasksStateType, TodolistType} from "../../App";
 
 export type AddTodolistActionType = {
     type: 'ADD-TODOLIST'
@@ -13,7 +13,7 @@ export type RemoveTodolistActionType = {
 type ChangeTodolistFilterActionType = {
     type: 'CHANGE-TODOLIST-FILTER'
     filter: FilterValueType
-    id: string
+    todolistID: string
 }
 type ChangeTodolistTitleActionType = {
     type: 'CHANGE-TODOLIST-TITLE'
@@ -26,6 +26,8 @@ export type ActionsTodolistType = AddTodolistActionType
     | ChangeTodolistFilterActionType
     | ChangeTodolistTitleActionType
 
+const initialState: Array<TodolistType> = []
+
 export const todolistReducer = (state: Array<TodolistType>, action: ActionsTodolistType): Array<TodolistType> => {
     switch (action.type) {
         case 'ADD-TODOLIST':
@@ -33,7 +35,7 @@ export const todolistReducer = (state: Array<TodolistType>, action: ActionsTodol
         case 'REMOVE-TODOLIST':
             return state.filter(tl => tl.id !== action.id)
         case 'CHANGE-TODOLIST-FILTER':
-            const todoList = state.find(tl => tl.id === action.id)
+            const todoList = state.find(tl => tl.id === action.todolistID)
             if (todoList) {
                 todoList.filter = action.filter
             }
@@ -56,8 +58,8 @@ export const addTodolistAC = (title: string): AddTodolistActionType => {
 export const removeTodolistAC = (id: string): RemoveTodolistActionType => {
     return {type: 'REMOVE-TODOLIST', id}
 }
-export const changeTodolistFilterAC = (id: string, filter: FilterValueType): ChangeTodolistFilterActionType => {
-    return {type: 'CHANGE-TODOLIST-FILTER', id, filter}
+export const changeTodolistFilterAC = (todolistID: string, filter: FilterValueType): ChangeTodolistFilterActionType => {
+    return {type: 'CHANGE-TODOLIST-FILTER', todolistID, filter}
 }
 export const changeTodolistTitleAC = (id: string, title: string): ChangeTodolistTitleActionType => {
     return {type: 'CHANGE-TODOLIST-TITLE', id, title}

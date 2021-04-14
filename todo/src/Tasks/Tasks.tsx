@@ -1,39 +1,42 @@
 import React, {ChangeEvent, Dispatch, useCallback} from 'react';
-import {TaskType} from "../App";
+import {TasksStateType, TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
 import {Checkbox, IconButton} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import {ActionsTaskType, changeTaskStatusAC, changeTaskTitleAC, removeTasktAC} from "../Redux/reducers/reducer-tasks";
 
 type PropsType = {
-    tasks: Array<TaskType>
+    stateTask: TasksStateType
     todoListsID: string
-    dispatchTasks: Dispatch<ActionsTaskType>
+    removeTask: (id: string, todolistID: string) => void
+    changeTitleTask: (id: string, todolistID: string, title: string) => void
+    changeStatusTask: (id: string, todolistID: string, statusTask: boolean) => void
 }
 
-const Tasks: React.FC<PropsType> = (
-    {
-        tasks,
+const Tasks: React.FC<PropsType> = (props) => {
+    const {
+        stateTask,
         todoListsID,
-        dispatchTasks
-    }
-) => {
+        removeTask,
+        changeTitleTask,
+        changeStatusTask
+    } = props
 
-    const tasksItems = tasks.map(t => {
+    const tasksItem = stateTask[todoListsID].map(t => {
             const removeTaskHandler = () => {
-                dispatchTasks(removeTasktAC(t.id, todoListsID))
+                removeTask(t.id, todoListsID)
             }
             const changeStatusTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                dispatchTasks(changeTaskStatusAC(t.id, todoListsID, e.currentTarget.checked))
+                changeStatusTask(t.id, todoListsID, e.currentTarget.checked)
             }
-            const changeTitle = (title: string) => {
-                dispatchTasks(changeTaskTitleAC(t.id, todoListsID, title))
+            const changeTitleTaskHandler = () => {
+                changeTitleTask(t.id, todoListsID, t.title)
             }
 
             return (<li key={t.id}
                         className={t.isDone ? 'isDone' : ''}>
                 <EditableTitle title={t.title}
-                               changeTitle={changeTitle}/>
+                               changeTitle={changeTitleTaskHandler}/>
                 <Checkbox
                     defaultChecked
                     color="primary"
@@ -51,9 +54,10 @@ const Tasks: React.FC<PropsType> = (
 
     return (
         <ul>
-            {tasksItems}
+            {tasksItem}
         </ul>
     );
 }
+
 
 export default Tasks;

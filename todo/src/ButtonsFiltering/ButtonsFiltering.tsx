@@ -1,23 +1,25 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {FilterValueType} from "../App";
 import s from '../App.module.css';
 import {Button} from "@material-ui/core";
 
 type PropsType = {
     filter: FilterValueType
-    onClickButtonAllHandler: () => void
-    onClickButtonActiveHandler: () => void
-    onClickButtonCompletedHandler: () => void
+    todoListsID: string
+    changeTodolistFilter: (todolistID: string, filter: FilterValueType) => void
 }
 
-const ButtonsFiltering: React.FC<PropsType> = (
-    {
+const ButtonsFiltering: React.FC<PropsType> = (props) => {
+
+    const {
         filter,
-        onClickButtonAllHandler,
-        onClickButtonActiveHandler,
-        onClickButtonCompletedHandler
-    }
-) => {
+        todoListsID,
+        changeTodolistFilter
+    } = props
+
+    const onClickButtonAllHandler = useCallback(() => changeTodolistFilter(todoListsID, "all"), [todoListsID]);
+    const onClickButtonActiveHandler = useCallback(() => changeTodolistFilter(todoListsID, "active"), [todoListsID]);
+    const onClickButtonCompletedHandler = useCallback(() => changeTodolistFilter(todoListsID, "completed"), [todoListsID]);
 
     return (
         <div>
