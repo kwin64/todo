@@ -19,6 +19,7 @@ const Tasks: React.FC<PropsType> = (props) => {
         changeTitleTask,
         changeStatusTask
     } = props
+
     // const tasksItem = stateTask[todoListsID].map(t => {
     //         const removeTaskHandler = () => {
     //             removeTask(t.id, todoListsID)

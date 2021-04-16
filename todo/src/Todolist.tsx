@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import s from './App.module.css';
 import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
@@ -70,6 +70,12 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
             changeTitleTask(taskID, todoListID, title)
         }
 
+        //filter
+        const onClickButtonAllHandler = () => changeTodolistFilter(todoListID, "all")
+        const onClickButtonActiveHandler = () => changeTodolistFilter(todoListID, "active")
+        const onClickButtonCompletedHandler = () => changeTodolistFilter(todoListID, "completed")
+
+
         const tasks = tasksForTodolist.map(t => {
             //почему здесь а не в Таскс??// уже не помню что имел ввиду
             return <Tasks key={todoListID}//какой тут айди будет task.id || todolistID??
@@ -83,14 +89,14 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
         return (
             <div className={s.todo}>
                 <TasksManagement titleTodoList={titleTodoList}
-                                 removeTodolist={removeTodolist}
+                                 removeTodolist={removeTodolist} //(id: string) => void' is not assignable to type '() => void'. где там айди?!
                                  changeTitleTodoList={changeTitleTodoList}
                                  addTask={addTask}
                 />
                 {tasks}
                 <ButtonsFiltering filter={filter}
                                   changeTodolistFilter={changeTodolistFilter}
-                                  todoListsID={todoListsID}
+                                  todoListID={todoListID}
                 />
             </div>
         );
