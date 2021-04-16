@@ -6,55 +6,67 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import {ActionsTaskType, changeTaskStatusAC, changeTaskTitleAC, removeTasktAC} from "../Redux/reducers/reducer-tasks";
 
 type PropsType = {
-    stateTask: TasksStateType
-    todoListsID: string
-    removeTask: (id: string, todolistID: string) => void
-    changeTitleTask: (id: string, todolistID: string, title: string) => void
-    changeStatusTask: (id: string, todolistID: string, statusTask: boolean) => void
+    task: TaskType
+    removeTask: (taskID: string) => void
+    changeStatusTask: (taskID: string, statusTask: boolean) => void
+    changeTitleTask: (taskID: string, title: string) => void
 }
 
 const Tasks: React.FC<PropsType> = (props) => {
     const {
-        stateTask,
-        todoListsID,
+        task,
         removeTask,
         changeTitleTask,
         changeStatusTask
     } = props
+    // const tasksItem = stateTask[todoListsID].map(t => {
+    //         const removeTaskHandler = () => {
+    //             removeTask(t.id, todoListsID)
+    //         }
+    //         const changeStatusTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //             changeStatusTask(t.id, todoListsID, e.currentTarget.checked)
+    //         }
+    //         const changeTitleTaskHandler = () => {
+    //             changeTitleTask(t.id, todoListsID, t.title)
+    //         }
+    //
+    //         return (<li key={t.id}
+    //                     className={t.isDone ? 'isDone' : ''}>
+    //             <EditableTitle title={t.title}
+    //                            changeTitle={changeTitleTaskHandler}/>
+    //             <Checkbox
+    //                 defaultChecked
+    //                 color="primary"
+    //                 inputProps={{'aria-label': 'secondary checkbox'}}
+    //                 checked={t.isDone}
+    //                 size='small'
+    //                 onChange={changeStatusTaskHandler}/>
+    //             <IconButton aria-label="delete">
+    //                 <DeleteIcon
+    //                     onClick={removeTaskHandler}/>
+    //             </IconButton>
+    //         </li>)
+    //     }
+    // )
 
-    const tasksItem = stateTask[todoListsID].map(t => {
-            const removeTaskHandler = () => {
-                removeTask(t.id, todoListsID)
-            }
-            const changeStatusTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                changeStatusTask(t.id, todoListsID, e.currentTarget.checked)
-            }
-            const changeTitleTaskHandler = () => {
-                changeTitleTask(t.id, todoListsID, t.title)
-            }
-
-            return (<li key={t.id}
-                        className={t.isDone ? 'isDone' : ''}>
-                <EditableTitle title={t.title}
-                               changeTitle={changeTitleTaskHandler}/>
+    return (
+        <ul>
+            <li key={task.id}
+                className={task.isDone ? 'isDone' : ''}>
+                <EditableTitle title={task.title}
+                               changeTitle={changeTitleTask}/>
                 <Checkbox
                     defaultChecked
                     color="primary"
                     inputProps={{'aria-label': 'secondary checkbox'}}
-                    checked={t.isDone}
+                    checked={task.isDone}
                     size='small'
-                    onChange={changeStatusTaskHandler}/>
+                    onChange={changeStatusTask}/>
                 <IconButton aria-label="delete">
                     <DeleteIcon
-                        onClick={removeTaskHandler}/>
+                        onClick={removeTask}/>
                 </IconButton>
-            </li>)
-        }
-    )
-
-    return (
-        <ul>
-            {tasksItem}
+            </li>
         </ul>
     );
 }

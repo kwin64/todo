@@ -72,7 +72,7 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
 
         const tasks = tasksForTodolist.map(t => {
             //почему здесь а не в Таскс??// уже не помню что имел ввиду
-            return <Tasks key={todoListID}
+            return <Tasks key={todoListID}//какой тут айди будет task.id || todolistID??
                           task={t}
                           removeTask={onClickHandlerRemoveTask}
                           changeStatusTask={onClickHandlerChangeTaskStatus}
@@ -87,12 +87,7 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
                                  changeTitleTodoList={changeTitleTodoList}
                                  addTask={addTask}
                 />
-                {/*<Tasks todoListsID={todoListsID}*/}
-                {/*       stateTask={stateTask}*/}
-                {/*       removeTask={removeTask}*/}
-                {/*       changeTitleTask={changeTitleTask}*/}
-                {/*       changeStatusTask={changeStatusTask}*/}
-                {/*/>*/}
+                {tasks}
                 <ButtonsFiltering filter={filter}
                                   changeTodolistFilter={changeTodolistFilter}
                                   todoListsID={todoListsID}
