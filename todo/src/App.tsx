@@ -70,7 +70,7 @@ function App() {
     const todolists = stateTodolist.map(tl => {
         return <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'}>
             <AddForm addItemForm={addTodolist}/>
-            <TodoList todoListsID={tl.id}
+            <TodoList todoListID={tl.id}
                       titleTodoList={tl.title}
                       filter={tl.filter}
                       stateTask={stateTask[tl.id]}

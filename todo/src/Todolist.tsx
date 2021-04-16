@@ -6,7 +6,7 @@ import TasksManagement from './TasksManagement/TasksManagement';
 import {FilterValueType, TaskType} from "./App";
 
 export type PropsType = {
-    todoListsID: string
+    todoListID: string
     titleTodoList: string
     filter: FilterValueType
     stateTask: Array<TaskType>
@@ -22,7 +22,7 @@ export type PropsType = {
 const TodoList: React.FC<PropsType> = React.memo(props => {
 
         let {
-            todoListsID,
+            todoListID,
             titleTodoList,
             stateTask,
             filter,
@@ -35,9 +35,11 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
             changeStatusTask,
         } = props;
 
+        //без понятия зачем дважды
         let allTodolistTasks = stateTask;//??????
         let tasksForTodolist = allTodolistTasks;//??????
 
+        //фильтр тасок
         if (props.filter === "active") {
             tasksForTodolist = allTodolistTasks.filter(t => !t.isDone);
         }
@@ -45,14 +47,25 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
             tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
         }
 
-        const onClickHandlerRemoveTask = (todolistID: string) => {
-            removeTask(id,todolistID)
+
+        const onClickHandlerRemoveTask = (taskID: string) => {
+            removeTask(taskID, todoListID)
         }
+        const onClickHandlerChangeTaskStatus = (taskID: string, statusTask: boolean) => {
+            changeStatusTask(taskID, todoListID, statusTask);
+        }
+        const onClickHandlerChangeTitleTask = (taskID: string, title: string) => {
+            changeTitleTask(taskID, todoListID, title)
+        }
+
 
         const tasks = tasksForTodolist.map(t => {
             //почему здесь а не в Таскс??
-            return <Tasks key={todoListsID}
+            return <Tasks key={todoListID}
                           task={t}
+                          removeTask={onClickHandlerRemoveTask}
+                          changeStatusTask={onClickHandlerChangeTaskStatus}
+                          changeTitleTask={onClickHandlerChangeTitleTask}
             />
         })
 
@@ -60,9 +73,11 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
         addTask = useCallback((title: string) => {
             addTask(todoListsID, title)
         }, [todoListsID, addTask])
+
         removeTodolist = () => {
             props.removeTodolist(todoListsID);
         }
+
         changeTitleTodoList = useCallback((title: string) => {
             changeTitleTodoList(todoListsID, title);
         }, [changeTitleTodoList, todoListsID])
