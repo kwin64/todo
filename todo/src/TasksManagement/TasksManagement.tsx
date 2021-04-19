@@ -11,14 +11,14 @@ type PropsType = {
     addTask: (title: string) => void
 }
 
-const TasksManagement: React.FC<PropsType> = (
-    {
+const TasksManagement: React.FC<PropsType> = (props) => {
+
+    const {
         titleTodoList,
         removeTodolist,
         changeTitleTodoList,
         addTask
-    }
-) => {
+    } = props
 
     return (
         <div>

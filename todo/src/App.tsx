@@ -80,7 +80,6 @@ function App() {
                       changeTitleTask={changeTitleTask}
             />
         </Box>
-
     })
     return (
         <div>

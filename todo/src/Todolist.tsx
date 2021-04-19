@@ -21,7 +21,7 @@ export type PropsType = {
 
 const TodoList: React.FC<PropsType> = React.memo(props => {
 
-        let {
+        const {
             todoListID,
             titleTodoList,
             stateTask,
@@ -46,14 +46,14 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
             tasksForTodolist = tasksForTodolist.filter(t => t.isDone);
         }
 
-        //fn container?
+        //fn container?!
         const addTaskForTasks = (title: string) => {
             addTask(todoListID, title)
         }
         const removeTodoListForTasks = () => {
             removeTodolist(todoListID);
         }
-        const changeTitleForTasks = changeTitleTodoList = (title: string) => {
+        const changeTitleForTasks = (title: string) => {
             changeTitleTodoList(todoListID, title);
         }
 
@@ -70,7 +70,7 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
         return (
             <div className={s.todo}>
                 <TasksManagement titleTodoList={titleTodoList}
-                                 removeTodolist={removeTodoListForTasks} //(id: string) => void' is not assignable to type '() => void'. где там айди?!
+                                 removeTodolist={removeTodoListForTasks}
                                  changeTitleTodoList={changeTitleForTasks}
                                  addTask={addTaskForTasks}
                 />

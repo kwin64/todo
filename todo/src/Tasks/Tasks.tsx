@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {TaskType} from "../App";
 import EditableTitle from "../EditableTitle";
 import {Checkbox, IconButton} from "@material-ui/core";
@@ -25,8 +25,8 @@ const Tasks: React.FC<PropsType> = (props) => {
     const onClickHandlerRemoveTask = () => {
         removeTask(task.id, todoListID)
     }
-    const onClickHandlerChangeTaskStatus = () => {
-        changeStatusTask(task.id, todoListID, task.isDone);
+    const onClickHandlerChangeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        changeStatusTask(task.id, todoListID, e.currentTarget.checked);
     }
     const onClickHandlerChangeTitleTask = (title: string) => {
         changeTitleTask(task.id, todoListID, title)
