@@ -1,5 +1,4 @@
 import React, {useCallback} from 'react';
-import {v1} from 'uuid';
 import AddForm from "./AddForm";
 import {
     addTodolistAC,
@@ -23,13 +22,9 @@ export type TodolistType = { id: string, title: string, filter: FilterValueType 
 
 function App() {
 
-    const firstTodo = v1()
-    const secondTodo = v1()
-
     const dispatch = useDispatch()
     const stateTodolist = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolistReducer)
     const stateTask = useSelector<AppRootStateType, TasksStateType>(state => state.tasksReducer)
-    const state = useSelector<AppRootStateType>(state => state)
 
     //todolist
     const addTodolist = useCallback((title: string) => {
@@ -70,7 +65,8 @@ function App() {
     const todolists = stateTodolist.map(tl => {
         return <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'}>
             <AddForm addItemForm={addTodolist}/>
-            <TodoList todoListID={tl.id}
+            <TodoList key={tl.id}
+                      todoListID={tl.id}
                       titleTodoList={tl.title}
                       filter={tl.filter}
                       stateTask={stateTask[tl.id]}

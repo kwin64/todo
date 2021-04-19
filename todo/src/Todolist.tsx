@@ -35,63 +35,44 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
             changeStatusTask,
         } = props;
 
-        //без понятия зачем дважды
-        let allTodolistTasks = stateTask;//??????
-        let tasksForTodolist = allTodolistTasks;//??????
+        //new obj tasks
+        let tasksForTodolist = stateTask;
 
         //фильтр тасок
         if (props.filter === "active") {
-            tasksForTodolist = allTodolistTasks.filter(t => !t.isDone);
+            tasksForTodolist = tasksForTodolist.filter(t => !t.isDone);
         }
         if (props.filter === "completed") {
-            tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
+            tasksForTodolist = tasksForTodolist.filter(t => t.isDone);
         }
 
-        //let const destruct????
-        //
-        addTask = (title: string) => {
+        //fn container?
+        const addTaskForTasks = (title: string) => {
             addTask(todoListID, title)
         }
-        removeTodolist = () => {
-            props.removeTodolist(todoListID);
+        const removeTodoListForTasks = removeTodolist = () => {
+            removeTodolist(todoListID);
         }
-        changeTitleTodoList = (title: string) => {
+        const changeTitleForTasks = changeTitleTodoList = (title: string) => {
             changeTitleTodoList(todoListID, title);
         }
 
-        //handlers
-        const onClickHandlerRemoveTask = (taskID: string) => {
-            removeTask(taskID, todoListID)
-        }
-        const onClickHandlerChangeTaskStatus = (taskID: string, statusTask: boolean) => {
-            changeStatusTask(taskID, todoListID, statusTask);
-        }
-        const onClickHandlerChangeTitleTask = (taskID: string, title: string) => {
-            changeTitleTask(taskID, todoListID, title)
-        }
-
-        //filter
-        const onClickButtonAllHandler = () => changeTodolistFilter(todoListID, "all")
-        const onClickButtonActiveHandler = () => changeTodolistFilter(todoListID, "active")
-        const onClickButtonCompletedHandler = () => changeTodolistFilter(todoListID, "completed")
-
-
         const tasks = tasksForTodolist.map(t => {
-            //почему здесь а не в Таскс??// уже не помню что имел ввиду
-            return <Tasks key={todoListID}//какой тут айди будет task.id || todolistID??
+            return <Tasks key={t.id}
                           task={t}
-                          removeTask={onClickHandlerRemoveTask}
-                          changeStatusTask={onClickHandlerChangeTaskStatus}
-                          changeTitleTask={onClickHandlerChangeTitleTask}
+                          removeTask={removeTask}
+                          changeStatusTask={changeStatusTask}
+                          changeTitleTask={changeTitleTask}
+                          todoListID={todoListID}
             />
         })
 
         return (
             <div className={s.todo}>
                 <TasksManagement titleTodoList={titleTodoList}
-                                 removeTodolist={removeTodolist} //(id: string) => void' is not assignable to type '() => void'. где там айди?!
-                                 changeTitleTodoList={changeTitleTodoList}
-                                 addTask={addTask}
+                                 removeTodolist={removeTodoListForTasks} //(id: string) => void' is not assignable to type '() => void'. где там айди?!
+                                 changeTitleTodoList={changeTitleForTasks}
+                                 addTask={addTaskForTasks}
                 />
                 {tasks}
                 <ButtonsFiltering filter={filter}

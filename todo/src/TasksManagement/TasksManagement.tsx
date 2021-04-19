@@ -7,8 +7,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 type PropsType = {
     titleTodoList: string
     removeTodolist: () => void
-    changeTitleTodoList: (id: string, newTitle: string) => void
-    addTask: (id: string, title: string) => void
+    changeTitleTodoList: (newTitle: string) => void
+    addTask: (title: string) => void
 }
 
 const TasksManagement: React.FC<PropsType> = (
@@ -23,8 +23,7 @@ const TasksManagement: React.FC<PropsType> = (
     return (
         <div>
             <h3>
-                <EditableTitle value={titleTodoList}
-                               title={titleTodoList}
+                <EditableTitle title={titleTodoList}
                                changeTitle={changeTitleTodoList}
                 />
                 <IconButton aria-label="delete">
