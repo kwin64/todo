@@ -64,7 +64,6 @@ function App() {
 
     const todolists = stateTodolist.map(tl => {
         return <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'}>
-            <AddForm addItemForm={addTodolist}/>
             <TodoList key={tl.id}
                       todoListID={tl.id}
                       titleTodoList={tl.title}

@@ -50,7 +50,7 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
         const addTaskForTasks = (title: string) => {
             addTask(todoListID, title)
         }
-        const removeTodoListForTasks = removeTodolist = () => {
+        const removeTodoListForTasks = () => {
             removeTodolist(todoListID);
         }
         const changeTitleForTasks = changeTitleTodoList = (title: string) => {
