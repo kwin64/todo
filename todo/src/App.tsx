@@ -30,37 +30,36 @@ function App() {
     const addTodolist = useCallback((title: string) => {
         const action = addTodolistAC(title)
         dispatch(action)
-    }, [])
-    const removeTodoList = (id: string) => {
+    }, [dispatch])
+    const removeTodoList = useCallback((id: string) => {
         let action = removeTodolistAC(id)
         dispatch(action)
-    }
-    const changeTitleTodoList = (id: string, newTitle: string) => {
+    }, [dispatch])
+    const changeTitleTodoList = useCallback((id: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(id, newTitle))
-    }
-    const changeTodolistFilter = (todolistID: string, filter: FilterValueType) => {
+    }, [dispatch])
+    const changeTodolistFilter = useCallback((todolistID: string, filter: FilterValueType) => {
         const action = changeTodolistFilterAC(todolistID, filter)
         dispatch(action)
-    }
+    }, [dispatch])
 
     //task
-    const addTask = (title: string, todoListsID: string) => {
+    const addTask = useCallback((title: string, todoListsID: string) => {
         const action = addTaskAC(title, todoListsID)
         dispatch(action)
-    }
-    const removeTask = (id: string, todolistID: string) => {
+    }, [dispatch])
+    const removeTask = useCallback((id: string, todolistID: string) => {
         const action = removeTasktAC(id, todolistID)
         dispatch(action)
-
-    }
-    const changeTitleTask = (id: string, todolistID: string, title: string) => {
+    }, [dispatch])
+    const changeTitleTask = useCallback((id: string, todolistID: string, title: string) => {
         const action = changeTaskTitleAC(id, todolistID, title)
         dispatch(action)
-    }
-    const changeStatusTask = (id: string, todolistID: string, statusTask: boolean) => {
+    }, [dispatch])
+    const changeStatusTask = useCallback((id: string, todolistID: string, statusTask: boolean) => {
         const action = changeTaskStatusAC(id, todolistID, statusTask)
         dispatch(action)
-    }
+    }, [dispatch])
 
     const todolists = stateTodolist.map(tl => {
         return <Box boxShadow={2} fontStyle={'oblique'} fontFamily={'Monospace'}>
