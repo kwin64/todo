@@ -67,7 +67,7 @@ function App() {
                       todoListID={tl.id}
                       titleTodoList={tl.title}
                       filter={tl.filter}
-                      stateTask={stateTask[tl.id]}
+                      stateTask={[...stateTask[tl.id]]}
 
                       removeTodolist={removeTodoList}
                       changeTitleTodoList={changeTitleTodoList}

@@ -7,12 +7,13 @@ type PropsType = {
     addItemForm: (text: string) => void
 }
 
-const AddForm: React.FC<PropsType> = React.memo((
-    {
+const AddForm: React.FC<PropsType> = React.memo(props => {
+
+    const {
         addItemForm
-    }
-) => {
-    // console.log('addForm rendering')
+    } = props
+
+    console.log('addForm rendering')
     const [error, setError] = useState<boolean>(false)
     const [valueTask, setValueTask] = useState<string>('')
 
