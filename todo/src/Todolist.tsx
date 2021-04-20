@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import s from './App.module.css';
 import ButtonsFiltering from './ButtonsFiltering/ButtonsFiltering';
 import Tasks from './Tasks/Tasks';
@@ -35,6 +35,8 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
             changeStatusTask,
         } = props;
 
+        console.log('todolist')
+
         //new obj tasks
         let tasksForTodolist = stateTask;
 
@@ -47,19 +49,19 @@ const TodoList: React.FC<PropsType> = React.memo(props => {
         }
 
         //fn container?!
-        const addTaskForTasks = (title: string) => {
+        const addTaskForTasks = useCallback((title: string) => {
             addTask(todoListID, title)
-        }
-        const removeTodoListForTasks = () => {
+        }, [])
+        const removeTodoListForTasks = useCallback(() => {
             removeTodolist(todoListID);
-        }
-        const changeTitleForTasks = (title: string) => {
+        }, [])
+        const changeTitleForTasks = useCallback((title: string) => {
             changeTitleTodoList(todoListID, title);
-        }
+        }, [])
 
         const tasks = tasksForTodolist.map(t => {
             return <Tasks key={t.id}
-                          task={t}
+                          task={{...t}}//перерисовка
                           removeTask={removeTask}
                           changeStatusTask={changeStatusTask}
                           changeTitleTask={changeTitleTask}
